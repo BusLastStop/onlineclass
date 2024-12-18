@@ -15,7 +15,7 @@
 		font-optical-sizing: auto;
 		font-weight: 500;
 		font-style: normal;
-		/* border:1px solid #ff8a65; */
+		border:1px solid #ff8a65;
 		color:#212121;
 	}
 	body{ overflow-y:scroll;overflow-x:hidden; }
@@ -42,8 +42,8 @@
 <header>
 	<c:if test="${empty sessionScope.user}">
 		<div id="headerUser">
-			<a href="${path}/member/loginpage.do">로그인</a>
-			<a href="${path}/member/enrollpage.do">회원가입</a>
+			<a href="${path}/student/loginpage.do">로그인</a>
+			<a href="${path}/student/enrollpage.do">회원가입</a>
 		</div>
 	</c:if>
 	<c:if test="${not empty sessionScope.user}">
@@ -51,7 +51,7 @@
 			<div class="dropdown">
 				<a href="#" onclick="dropdownList()" id="userMenu">닉네님님</a>
 				<ul>
-					<li class="dropdownList" onclick="location.assign('${path}/member/mypage.do')">마이페이지</li>
+					<li class="dropdownList" onclick="location.assign('${path}/student/mypage.do')">마이페이지</li>
 					<li class="dropdownList">알림</li>
 				</ul>
 			</div>
