@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인 화면</title>
+<title>메인 페이지</title>
 </head>
 <body>
 
