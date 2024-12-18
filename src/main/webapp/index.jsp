@@ -3,7 +3,9 @@
 <style>
 	.promotion{ position:absolute;top:50%;left:20%; }
 	.promotion *{ margin:0 }
-	.promotion button{ width:80px;height:30px;font-size:16px;border-radius:10px; }
+	.promotion h2{ font-size:48px; }
+	.promotion h3{ font-size:32px; }
+	.promotion button{ width:100px;height:40px;font-size:20px;border-radius:10px; }
 	.video-class{ width:80%;height:800px;min-width:510px;display:flex;flex-direction:column;justify-content:center;align-items:center; }
 	.list-container{ width:80%;height:40%;background-color:#f5f5f5; }
 	.title{ display:inline-block;margin-left:40px; }
