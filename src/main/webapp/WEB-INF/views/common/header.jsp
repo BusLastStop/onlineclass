@@ -6,11 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="${path}/resources/images/blue.png" type="image/x-icon"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" href="${path}/resources/images/red.png" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
-	*{border:1px solid #90caf9;color:#212121;}
+	*{
+		font-family: "Noto Sans KR", serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		/* border:1px solid #ff8a65; */
+		color:#212121;
+	}
 	body{ overflow-y:scroll;overflow-x:hidden; }
 	header{display:flex;flex-direction:column;align-items:center;}
 	div#headerUser{display:flex;justify-content:flex-end;align-items:center;width:80%;padding:3px}
@@ -22,17 +29,14 @@
 	#category>li{margin-left:10px;margin-right:10px}
 	.writer-container{background-color:f5f5f5;}
 	.writer-header{display:flex;justify-content:space-between;align-items:center;}
-	.writer-title{display:inline-block;margin-left:40px}
 	ul>li{list-style-type:none;}
-	.writer-section{padding-left:40px;padding-right:40px;margin:0;margin-top:4px;}
-	.writer-section>li{margin-bottom:4px;}
 	a{ text-decoration:none; }
 	.dropdown{ overflow:visible;max-height:21px;text-align:right;z-index:10; }
 	.dropdown>ul{ padding:0;margin:10px 0 0 0;display:flex;flex-direction:column;justify-content:center;background-color:white; }
 	.dropdown li{ padding:2px;text-align:center;width:90px;height:24px; }
 	.dropdownList{ display:none;cursor:pointer; }
 </style>
-<title>학부모 커뮤니티</title>
+<title>온라인 강의 사이트</title>
 </head>
 <body>
 <header>
@@ -55,10 +59,12 @@
 		</div>
 	</c:if>
 	<div id="headerMenu">
-		<a href="${path}"><img src="${path}/resources/images/blue.png" width="100" height="60"></a>
-		<h2>교육정보</h2>
-		<h2><a href="${path}/post/postlist.do">대학정보 게시판</a></h2>
-		<h2>입시달력</h2>
+		<a href="${path}"><img src="${path}/resources/images/red.png" width="100" height="60"></a>
+		<h2>녹화 강의</h2>
+		<h2>실시간 강의</h2>
+		<h2>나의 강의정보</h2>
+		<h2>정보공유</h2>
+		<h2>마이페이지</h2>
 	</div>
 	<script>
 		const dropdownList=()=>{
