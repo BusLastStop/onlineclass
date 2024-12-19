@@ -15,7 +15,7 @@
 		font-optical-sizing: auto;
 		font-weight: 500;
 		font-style: normal;
-		border:1px solid #ff8a65;
+		/* border:1px solid #ff8a65; */
 		color:#212121;
 	}
 	body{ overflow-y:scroll;overflow-x:hidden; }
@@ -31,7 +31,7 @@
 	.writer-header{display:flex;justify-content:space-between;align-items:center;}
 	ul>li{list-style-type:none;}
 	a{ text-decoration:none; }
-	.dropdown{ overflow:visible;max-height:21px;text-align:right;z-index:10; }
+	.dropdown{ overflow:visible;max-height:24px;text-align:right;z-index:10; }
 	.dropdown>ul{ padding:0;margin:10px 0 0 0;display:flex;flex-direction:column;justify-content:center;background-color:white; }
 	.dropdown li{ padding:2px;text-align:center;width:90px;height:24px; }
 	.dropdownList{ display:none;cursor:pointer; }
@@ -42,16 +42,16 @@
 <header>
 	<c:if test="${empty sessionScope.user}">
 		<div id="headerUser">
-			<a href="${path}/student/loginpage.do">로그인</a>
-			<a href="${path}/student/enrollpage.do">회원가입</a>
+			<a href="${path}/member/loginpage.do">로그인</a>
+			<a href="${path}/member/enrollpage.do">회원가입</a>
 		</div>
 	</c:if>
 	<c:if test="${not empty sessionScope.user}">
 		<div id="headerUser">
 			<div class="dropdown">
-				<a href="#" onclick="dropdownList()" id="userMenu">닉네님님</a>
+				<a href="#" onclick="dropdownList()" id="userMenu">${user.userType}님</a>
 				<ul>
-					<li class="dropdownList" onclick="location.assign('${path}/student/mypage.do')">마이페이지</li>
+					<li class="dropdownList">마이페이지</li>
 					<li class="dropdownList">알림</li>
 				</ul>
 			</div>
@@ -59,9 +59,9 @@
 		</div>
 	</c:if>
 	<div id="headerMenu">
-		<a href="${path}"><img src="${path}/resources/images/red.png" width="100" height="60"></a>
-		<h2>녹화 강의</h2>
-		<h2>실시간 강의</h2>
+		<a href="${path}" style="height:60px;"><img src="${path}/resources/images/red.png" width="100" height="60"></a>
+		<h2><a href="${path}/member/recordlecturelist.do">녹화 강의</a></h2>
+		<h2><a href="">실시간 강의</a></h2>
 		<h2>나의 강의정보</h2>
 		<h2>정보공유</h2>
 		<h2>마이페이지</h2>

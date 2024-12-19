@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	.promotion{ position:absolute;top:50%;left:20%; }
+	.promotion{ position:absolute;top:50%;left:15%; }
 	.promotion *{ margin:0 }
-	.promotion h2{ font-size:48px; }
-	.promotion h3{ font-size:32px; }
-	.promotion button{ width:100px;height:40px;font-size:20px;border-radius:10px; }
+	.promotion h2{ font-size:2vw; }
+	.promotion h3{ font-size:2vw; }
+	.promotion button{ width:8vw;height:3vw;font-size:1.5vw;border-radius:10px; }
+	.promotion2{ position:absolute;top:50%;right:15%; }
+	.promotion2 *{ margin:0 }
+	.promotion2 h2{ font-size:2vw; }
+	.promotion2 h3{ font-size:2vw; }
+	.promotion2 button{ width:10vw;height:3vw;font-size:1.5vw;border-radius:10px; }
 	.video-class{ width:80%;height:800px;min-width:510px;display:flex;flex-direction:column;justify-content:center;align-items:center; }
 	.list-container{ width:80%;height:40%;background-color:#f5f5f5; }
 	.title{ display:inline-block;margin-left:5%; }
@@ -21,15 +26,25 @@
 </style>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <section>
-	<div style="display:flex;justify-content:center;align-items:flex-start;overflow:hidden;height:90%;">
-		<img src="${pageContext.request.contextPath}/resources/images/community.png" width="1887px" style="opacity:70%;">
-		<div class="promotion">
-			<h2 style="color:#212121;">무한한 학습 기회</h2>
-			<h3 style="color:#212121;">언제 어디서나 온라인 강의</h3>
-			<button style="color:#212121;">강의보기</button>
+	<div style="display:flex;justify-content:center;align-items:center;height:90vh">
+		<div style="display:flex;justify-content:center;align-items:flex-start;overflow:hidden;height:100%;">
+			<img src="${pageContext.request.contextPath}/resources/images/onlineclass2.jpeg" width="1887px" style="opacity:70%;">
+			<div class="promotion">
+				<h2 style="color:#212121;">무한한 학습 기회</h2>
+				<h3 style="color:#212121;">언제 어디서나 온라인 강의</h3>
+				<button style="color:#212121;">강의보기</button>
+			</div>
+		</div>
+		<div style="display:flex;justify-content:center;align-items:flex-start;overflow:hidden;height:100%;">
+			<img src="${pageContext.request.contextPath}/resources/images/onlineclass.jpeg" width="1887px" style="opacity:70%;">
+			<div class="promotion2">
+				<h2 style="color:#212121;">디지털 시대의 교육 혁신</h2>
+				<h3 style="color:#212121;">실시간 강의 도구와 플랫폼</h3>
+				<button style="color:#212121;">실시간 강의</button>
+			</div>
 		</div>
 	</div>
-	<div style="display:flex;justify-content:center;align-items:center;">
+	<%-- <div style="display:flex;justify-content:center;align-items:center;">
 		<div class="video-class">
 			<div class="list-container">
 				<h2 class="title">인기 강의</h2><br>
@@ -105,6 +120,6 @@
 				</table>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

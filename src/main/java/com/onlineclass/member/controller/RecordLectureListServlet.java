@@ -1,4 +1,4 @@
-package com.onlineclass.student.controller;
+package com.onlineclass.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginPageServlet
+ * Servlet implementation class RecordLectureListServlet
  */
-@WebServlet("/student/loginpage.do")
-public class LoginPageServlet extends HttpServlet {
+@WebServlet("/member/recordlecturelist.do")
+public class RecordLectureListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginPageServlet() {
+    public RecordLectureListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class LoginPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/student/loginpage.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/recordlecturelist.jsp").forward(request, response);
 	}
 
 	/**
