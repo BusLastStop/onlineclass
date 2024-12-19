@@ -13,8 +13,8 @@
 		flex-direction:column;
 		justify-content:center;
 		align-items:center;
-		min-height:100vh;
- 		overflow:hidden;
+		min-height:110vh;
+ 		overflow-y:scroll;
  		margin:0;
 	}
 	#login-container{
@@ -23,9 +23,9 @@
 		justify-content:center;
 		align-items:center;
 		width:40%;
-		height:100vh;
+		height:110vh;
 		min-width:500px;
-		background-color:#E3F2FD;
+		background-color:#fbe9e7;
 	}
 	#login{
 		display:flex;
@@ -40,7 +40,7 @@
 	#login input{
 		margin-bottom:5px;
 		height:30px;
-		border:1px solid #BBDEFB;
+		border:1px solid #fbe9e7;
 	}
 </style>
 <body>
@@ -54,25 +54,27 @@
 			<input type="password" name="userPwd">
 			<p>비밀번호 확인</p>
 			<input type="password" name="userPwdCheck">
+			<p>이름</p>
+			<input type="text" name="name">
 			<p>닉네임</p>
 			<input type="text" name="nickname">
-			<p>연락처</p>
-			<input type="text" name="phone">
-			<p>회원유형</p>
-			<div style="display:flex;">
-				<label style="display:flex;align-items:center;"><input type="radio" name="memberType" value="parent">학부모</label>
-				<label style="display:flex;align-items:center;"><input type="radio" name="memberType" value="teacher">교사</label>
-			</div>
 			<p>생년월일</p>
 			<input type="date" name="birth">
-			<p>자녀학년</p>
-			<input type="text" name="childGrade">
+			<p>이메일</p>
+			<input type="text" name="email">
+			<p>연락처</p>
+			<input type="text" name="phone">
+			<p>성별</p>
+			<div style="display:flex;">
+				<label style="display:flex;align-items:center;"><input type="radio" name="gender" value="M">남</label>
+				<label style="display:flex;align-items:center;"><input type="radio" name="gender" value="F">여</label>
+			</div>
+			<p>주소</p>
+			<input type="text" name="address">
 			<p>학교명</p>
 			<input type="text" name="school">
-			<p>거주지</p>
-			<input type="text" name="address">
 			<label style="display:flex;align-items:center;"><input type="checkbox" name="saveId">로그인 상태 유지</label>
-			<input type="submit" value="회원가입" style="background-color:#90CAF9">
+			<input type="submit" value="회원가입" style="background-color:#ffccbc">
 		</form>
 	</div>
 </body>

@@ -31,7 +31,7 @@
 	.writer-header{display:flex;justify-content:space-between;align-items:center;}
 	ul>li{list-style-type:none;}
 	a{ text-decoration:none; }
-	.dropdown{ overflow:visible;max-height:21px;text-align:right;z-index:10; }
+	.dropdown{ overflow:visible;max-height:24px;text-align:right;z-index:10; }
 	.dropdown>ul{ padding:0;margin:10px 0 0 0;display:flex;flex-direction:column;justify-content:center;background-color:white; }
 	.dropdown li{ padding:2px;text-align:center;width:90px;height:24px; }
 	.dropdownList{ display:none;cursor:pointer; }
@@ -42,16 +42,16 @@
 <header>
 	<c:if test="${empty sessionScope.user}">
 		<div id="headerUser">
-			<a href="${path}/student/loginpage.do">로그인</a>
-			<a href="${path}/student/enrollpage.do">회원가입</a>
+			<a href="${path}/member/loginpage.do">로그인</a>
+			<a href="${path}/member/enrollpage.do">회원가입</a>
 		</div>
 	</c:if>
 	<c:if test="${not empty sessionScope.user}">
 		<div id="headerUser">
 			<div class="dropdown">
-				<a href="#" onclick="dropdownList()" id="userMenu">닉네님님</a>
+				<a href="#" onclick="dropdownList()" id="userMenu">${user.userType}님</a>
 				<ul>
-					<li class="dropdownList" onclick="location.assign('${path}/student/mypage.do')">마이페이지</li>
+					<li class="dropdownList" onclick="location.assign('${path}/member/mypage.do')">마이페이지</li>
 					<li class="dropdownList">알림</li>
 				</ul>
 			</div>

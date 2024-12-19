@@ -1,4 +1,4 @@
-package com.onlineclass.student.controller;
+package com.onlineclass.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginPageServlet
  */
-@WebServlet("/student/loginpage.do")
-public class LoginPageServlet extends HttpServlet {
+@WebServlet("/member/logout.do")
+public class LogoutPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginPageServlet() {
+    public LogoutPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,8 @@ public class LoginPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/student/loginpage.jsp").forward(request, response);
+		request.getSession().removeAttribute("user");
+		request.getRequestDispatcher("/").forward(request, response);
 	}
 
 	/**
