@@ -60,9 +60,23 @@
 	</c:if>
 	<div id="headerMenu">
 		<a href="${path}" style="height:60px;"><img src="${path}/resources/images/red.png" width="100" height="60"></a>
-		<h2><a href="${path}/member/recordlecturelist.do">녹화 강의</a></h2>
-		<h2><a href="${path}/member/realtimelecturelist.do">실시간 강의</a></h2>
-		<h2><a href="${path}/member/mylecturelist.do">나의 강의정보</a></h2>
+		<c:if test="${empty sessionScope.user || sessionScope.user.userType!='관리자'}">
+			<h2>
+				<c:if test="${empty sessionScope.user || sessionScope.user.userType=='학생'}">
+					<a href="${path}/member/recordlecturelist.do">녹화 강의</a>
+				</c:if>
+				<c:if test="${not empty sessionScope.user && sessionScope.user.userType=='강사'}">
+					<a href="#" onclick="window.open('${path}/instructor/lectureupload.do','_blank','width=500,height=400')">녹화 강의</a>
+				</c:if>
+			</h2>
+			<h2><a href="${path}/member/realtimelecturelist.do">실시간 강의</a></h2>
+			<h2><a href="${path}/member/mylecturelist.do">나의 강의정보</a></h2>
+		</c:if>
+		<c:if test="${not empty sessionScope.user && sessionScope.user.userType=='관리자'}">
+			<h2><a href="${path}/admin/lecturelist.do">강의 목록</a></h2>
+			<h2>학생 목록</h2>
+			<h2>강사 목록</h2>
+		</c:if>
 		<h2>정보공유</h2>
 		<h2>마이페이지</h2>
 	</div>

@@ -55,6 +55,7 @@
 		<div style="display:flex;justify-content:center;align-items:center;width:100%;">
 			<h2 id="student" style="background-color:#fbe9e7">학생</h2>
 			<h2 id="instructor" style="background-color:#ffccbc">강사</h2>
+			<h2 id="admin" style="background-color:#ffccbc">관리자</h2>
 		</div>
 		<h1>로그인!</h1>
 		<form id="login" class="point" action="${pageContext.request.contextPath}/member/login.do" method="post">
@@ -79,12 +80,20 @@
 		$("#student").click(e=>{
 			$("#student").css("background-color","#fbe9e7");
 			$("#instructor").css("background-color","#ffccbc");
+			$("#admin").css("background-color","#ffccbc");
 			$("#userType").attr("value","학생");
 		});
 		$("#instructor").click(e=>{
 			$("#student").css("background-color","#ffccbc");
 			$("#instructor").css("background-color","#fbe9e7");
+			$("#admin").css("background-color","#ffccbc");
 			$("#userType").attr("value","강사");
+		});
+		$("#admin").click(e=>{
+			$("#student").css("background-color","#ffccbc");
+			$("#instructor").css("background-color","#ffccbc");
+			$("#admin").css("background-color","#fbe9e7");
+			$("#userType").attr("value","관리자");
 		});
 	</script>
 </body>

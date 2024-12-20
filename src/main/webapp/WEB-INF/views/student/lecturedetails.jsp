@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="${path}/resources/images/red.png" type="image/x-icon"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <title>강의 상세 페이지</title>
 <style>
@@ -75,12 +78,14 @@
 	<div style="text-align:center;border:0;">
 		<img src="${pageContext.request.contextPath}/resources/images/community.png" alt="강의 사진">
 	</div>
-	<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">
-		<button>수강신청</button>
-		<button>관심강의</button>
-		<button>관심강사</button>
-		<button>수업계획서</button>
-	</div>
+	<c:if test="${not empty sessionScope.user}">
+		<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">
+			<button>수강신청</button>
+			<button>관심강의</button>
+			<button>관심강사</button>
+			<button>수업계획서</button>
+		</div>
+	</c:if>
 	<div>
 		<h4>수업 개요</h4>
 		<p>수업 개요에 대한 내용을 적는 곳</p>
@@ -99,29 +104,33 @@
 		<h4>강사소개</h4>
 		<p>강사 소개에 대한 내용을 적는 곳</p>
 	</div>
-	<div>
-		<h4>강의후기</h4>
-		<table>
-			<tr>
-				<td>닉네임닉네임</td>
-				<td>후기</td>
-				<td>2024-12-20</td>
-			</tr>
-			<tr>
-				<td>닉네임</td>
-				<td>후기</td>
-				<td>날짜</td>
-			</tr>
-			<tr>
-				<td>닉네임</td>
-				<td>후기</td>
-				<td>날짜</td>
-			</tr>
-		</table>
-	</div>
+	<c:if test="${not empty sessionScope.user}">
+		<div>
+			<h4>강의후기</h4>
+			<table>
+				<tr>
+					<td>닉네임닉네임</td>
+					<td>후기</td>
+					<td>2024-12-20</td>
+				</tr>
+				<tr>
+					<td>닉네임</td>
+					<td>후기</td>
+					<td>날짜</td>
+				</tr>
+				<tr>
+					<td>닉네임</td>
+					<td>후기</td>
+					<td>날짜</td>
+				</tr>
+			</table>
+		</div>
+	</c:if>
 	<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">
-		<button>수강신청</button>
-		<button>나가기</button>
+		<c:if test="${not empty sessionScope.user}">
+			<button>수강신청</button>
+		</c:if>
+		<button onclick="window.close();">나가기</button>
 	</div>
 </body>
 </html>
