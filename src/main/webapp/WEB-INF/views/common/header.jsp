@@ -61,8 +61,8 @@
 	<div id="headerMenu">
 		<a href="${path}" style="height:60px;"><img src="${path}/resources/images/red.png" width="100" height="60"></a>
 		<h2><a href="${path}/member/recordlecturelist.do">녹화 강의</a></h2>
-		<h2><a href="">실시간 강의</a></h2>
-		<h2>나의 강의정보</h2>
+		<h2><a href="${path}/member/realtimelecturelist.do">실시간 강의</a></h2>
+		<h2><a href="${path}/member/mylecturelist.do">나의 강의정보</a></h2>
 		<h2>정보공유</h2>
 		<h2>마이페이지</h2>
 	</div>

@@ -31,13 +31,15 @@
 		border-bottom-style:solid;
 		border-top-color:#ffccbc;
 		border-bottom-color:#ffccbc;
-		margin:20px 0 20px 0;
+		margin:20px 0 0 0;
 	}
-	#recordList{ width:80%;display:flex;justify-content:center;align-items:center;margin:auto;z-index:-1; }
-	#recordList .contents{ display:inline-block;width:24%;padding:10px;margin:0;z-index:-1; }
+	#record-container h1{ width:80%;margin:auto; }
+	#recordList{ width:80%;margin:auto;z-index:-1; }
+	#recordList .contents{ display:inline-block;width:23%;padding:0;margin:10px;z-index:-1;cursor:pointer; }
 	.contents img{ width:60%;min-width:100px;max-height:180px;min-height:70px; }
 	.contents h4{ margin:5px 0 5px 0; }
 	.contents p{ margin:0; }
+	#uploadBtn{ width:95px;height:30px;border:1px solid #ffccbc;border-radius:3px;background-color:#fbe9e7;}
 </style>
 <section>
 	<form id="searchForm" action="" method="get">
@@ -116,9 +118,19 @@
 		</div>
 	</form>
 	<div id="record-container">
+		<h1>나의 녹화강의</h1>
 		<div id="recordList">
+			<div class="contents" onclick="window.open('${path}/student/lecturedetails.do','_blank','width=1000,height=800');">
+				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
+				<h4>녹화강의</h4>
+				<div style="display:flex;">
+					<p>강사명</p>
+					<p>|</p>
+					<p>날짜</p>
+				</div>
+			</div>
 			<div class="contents">
-				<img src="${pageContext.request.contextPath}/resources/images/class1.jpeg" alt="강의사진">
+				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
 				<h4>녹화강의</h4>
 				<div style="display:flex;">
 					<p>강사명</p>
@@ -136,7 +148,7 @@
 				</div>
 			</div>
 			<div class="contents">
-				<img src="${pageContext.request.contextPath}/resources/images/class1.jpeg" alt="강의사진">
+				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
 				<h4>녹화강의</h4>
 				<div style="display:flex;">
 					<p>강사명</p>
@@ -145,7 +157,34 @@
 				</div>
 			</div>
 			<div class="contents">
-				<img src="${pageContext.request.contextPath}/resources/images/class1.jpeg" alt="강의사진">
+				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
+				<h4>녹화강의</h4>
+				<div style="display:flex;">
+					<p>강사명</p>
+					<p>|</p>
+					<p>날짜</p>
+				</div>
+			</div>
+			<div class="contents">
+				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
+				<h4>녹화강의</h4>
+				<div style="display:flex;">
+					<p>강사명</p>
+					<p>|</p>
+					<p>날짜</p>
+				</div>
+			</div>
+			<div class="contents">
+				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
+				<h4>녹화강의</h4>
+				<div style="display:flex;">
+					<p>강사명</p>
+					<p>|</p>
+					<p>날짜</p>
+				</div>
+			</div>
+			<div class="contents">
+				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
 				<h4>녹화강의</h4>
 				<div style="display:flex;">
 					<p>강사명</p>
@@ -154,6 +193,12 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div style="width:80%;margin:auto;text-align:right;">
+		<button id="uploadBtn">강의 업로드</button>
+	</div>
+	<div>
+		<p style="text-align:center;border:1px solid #ffccbc;margin:0;">페이지네이션</p>
 	</div>
 	<script>
 		const openFilter=()=>{

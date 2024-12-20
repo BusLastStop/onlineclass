@@ -1,8 +1,6 @@
-package com.onlineclass.member.controller;
+package com.onlineclass.student.controller;
 
 import java.io.IOException;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RecordLectureListServlet
+ * Servlet implementation class LectureDetailsServlet
  */
-@WebServlet("/member/recordlecturelist.do")
-public class RecordLectureListServlet extends HttpServlet {
+@WebServlet("/student/lecturedetails.do")
+public class LectureDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecordLectureListServlet() {
+    public LectureDetailsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,12 +26,7 @@ public class RecordLectureListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String,String> user = (Map<String,String>)request.getSession().getAttribute("user");
-		if(user!=null && user.get("userType").equals("강사")) {
-			request.getRequestDispatcher("/WEB-INF/views/instructor/recordlecturelist.jsp").forward(request, response);
-		} else {
-			request.getRequestDispatcher("/WEB-INF/views/student/recordlecturelist.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("/WEB-INF/views/student/lecturedetails.jsp").forward(request, response);
 	}
 
 	/**
