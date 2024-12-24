@@ -32,7 +32,7 @@
 	#enroll{
 		display:flex;
 		flex-direction:column;
-		width:300px;
+		width:350px;
 	}
 	#enroll p{
 		padding:0;
@@ -53,14 +53,15 @@
 			<input type="hidden" name="userType" value="${param.type}">
 			<p>아이디</p>
 			<div style="display:flex;justify-content:center;align-items:center;">
-				<input type="text" name="userId" required id="userId" style="width:70%;">
+				<input type="text" name="userId" required id="userId" style="width:75%;" placeholder="영어 소문자, 숫자 포함 8~12자리">
 				<button type="button" id="idCheck" style="width:80px;height:30px;margin-left:5px;background-color:#ffccbc">중복확인</button>
 				<input type="hidden" id="idDuplicate" value="false">
 			</div>
 			<p>비밀번호</p>
-			<input type="password" name="userPw" id="pw" required>
+			<input type="password" name="userPw" id="pw" required placeholder="영어 대소문자, 숫자, 특수문자 포함 8~12자리">
 			<p>비밀번호 확인</p>
 			<input type="password" name="userPwCheck" id="pwCheck">
+			<p id="pwResultText"></p>
 			<input type="hidden" id="pwCheckResult" value="false">
 			<p>이름</p>
 			<input type="text" name="name" required>
@@ -106,11 +107,11 @@
 			else{
 				$.post("${pageContext.request.contextPath}/${param.type}/selectone${param.type}.do",{"userId":userId},data=>{
 					if(data!=null){
-						alert("중복!");
+						alert("중복되는 아이디입니다!");
 						document.getElementById("idDuplicate").value="false";
 						document.getElementById("userId").focus();
 					}else{
-						alert("사용가능!");
+						alert("사용가능한 아이디입니다!");
 						document.getElementById("idDuplicate").value="true";
 					}
 				});
@@ -121,13 +122,13 @@
 		});
 		$("#pwCheck").blur(e=>{
 			if(document.getElementById("pw").value==""){
-				console.log("비밀번호 입력!");
+				document.getElementById("pwResultText").innerText="비밀번호를 입력하세요!";
 				document.getElementById("pwCheckResult").value="false";
 			}else if(document.getElementById("pw").value!=document.getElementById("pwCheck").value){
-				console.log("비밀번호가 다릅니다!");
+				document.getElementById("pwResultText").innerText="비밀번호가 다릅니다!";
 				document.getElementById("pwCheckResult").value="false";
 			}else{
-				console.log("비밀번호 일치!");
+				document.getElementById("pwResultText").innerText="비밀번호 일치!";
 				document.getElementById("pwCheckResult").value="true";
 			}
 		});
@@ -152,15 +153,27 @@
 		})
 		$("#enroll").submit(e=>{
 			if(document.getElementById("idDuplicate").value=="false"){
-				alert("아이디 중복체크 하세욧!");
+				alert("아이디 중복체크를 해주세요!");
+				return false;
+			}
+			const idReg=/(?=.*[a-zA-Z])(?=.*[0-9]).{8,12}/;
+			const id=document.getElementById("userId").value;
+			if(!idReg.test(id)){
+				alert("아이디가 올바르지 않습니다! 영문자, 숫자를 포함하여 8글자 이상 12글자 이하로 만들어 주세요!");
 				return false;
 			}
 			if(document.getElementById("pwCheckResult").value=="false"){
-				alert("비밀번호 체크 다시 하세욧!");
+				alert("비밀번호가 일치하지 않습니다!");
+				return false;
+			}
+			const pwReg=/(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,12}/;
+			const pw=document.getElementById("pw").value;
+			if(!pwReg.test(pw)){
+				alert("비밀번호가 올바르지 않습니다! 영문자 숫자, 특수문자를 포함하여 8글자 이상 12글자 이하로 만들어 주세요!");
 				return false;
 			}
 			if(document.getElementById("emailDup").value=="false"){
-				alert("이메일 중복체크 하세요!");
+				alert("이메일 중복체크를 해주세요!");
 				return false;
 			}
 		});

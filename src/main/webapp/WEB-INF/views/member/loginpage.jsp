@@ -60,8 +60,8 @@
 		<h1>로그인!</h1>
 		<form id="login" class="point" action="${pageContext.request.contextPath}/member/login.do" method="post">
 			<input type="hidden" id="userType" name="userType" value="학생">
-			<input type="text" name="userId">
-			<input type="password" name="userPw">
+			<input type="text" id="userId" name="userId">
+			<input type="password" id="userPw" name="userPw">
 			<label style="display:flex;align-items:center;"><input type="checkbox" name="saveId">로그인 상태 유지</label>
 			<input type="submit" value="로그인" style="background-color:#ffccbc">
 		</form>
@@ -94,6 +94,15 @@
 			$("#instructor").css("background-color","#ffccbc");
 			$("#admin").css("background-color","#fbe9e7");
 			$("#userType").attr("value","관리자");
+		});
+		$("#login").submit(e=>{
+			if(document.getElementById("userId").value==""){
+				alert("아이디를 입력하세요!");
+				return false;
+			}else if(document.getElementById("userPw").value==""){
+				alert("비밀번호를 입력하세요!");
+				return false;
+			}
 		});
 	</script>
 </body>
