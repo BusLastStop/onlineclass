@@ -2,6 +2,8 @@ package com.onlineclass.student.service;
 
 import static com.onlineclass.common.SqlSessionTemplate.getSession;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.onlineclass.student.dao.StudentDAO;
@@ -34,5 +36,12 @@ public class StudentService {
 		}
 		session.close();
 		return result;
+	}
+	
+	public Student studentLogin(Map<String, String> user) {
+		SqlSession session = getSession();
+		Student student = dao.studentLogin(session, user);
+		session.close();
+		return student;
 	}
 }
