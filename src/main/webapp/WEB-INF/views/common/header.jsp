@@ -66,7 +66,7 @@
 					<a href="${path}/member/recordlecturelist.do">녹화 강의</a>
 				</c:if>
 				<c:if test="${not empty sessionScope.user && sessionScope.user.userType=='강사'}">
-					<a href="#" onclick="window.open('${path}/instructor/lectureupload.do','_blank','width=500,height=400')">녹화 강의</a>
+					<a href="#" onclick="window.open('${path}/teacher/lectureupload.do','_blank','width=500,height=400')">녹화 강의</a>
 				</c:if>
 			</h2>
 			<h2><a href="${path}/member/realtimelecturelist.do">실시간 강의</a></h2>

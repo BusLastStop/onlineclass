@@ -61,7 +61,7 @@
 		<form id="login" class="point" action="${pageContext.request.contextPath}/member/login.do" method="post">
 			<input type="hidden" id="userType" name="userType" value="학생">
 			<input type="text" name="userId">
-			<input type="password" name="userPwd">
+			<input type="password" name="userPw">
 			<label style="display:flex;align-items:center;"><input type="checkbox" name="saveId">로그인 상태 유지</label>
 			<input type="submit" value="로그인" style="background-color:#ffccbc">
 		</form>

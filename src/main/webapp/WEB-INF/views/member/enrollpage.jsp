@@ -73,9 +73,9 @@
 				<img src="${pageContext.request.contextPath}/resources/images/colorful.png" alt="학생">
 				<h2 id="student">학생</h2>
 			</div>
-			<div class="select" onclick="location.assign('${pageContext.request.contextPath}/member/enrollmember.do?type=instructor')">
+			<div class="select" onclick="location.assign('${pageContext.request.contextPath}/member/enrollmember.do?type=teacher')">
 				<img src="${pageContext.request.contextPath}/resources/images/colorful.png" alt="강사">
-				<h2 id="instructor">강사</h2>
+				<h2 id="teacher">강사</h2>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-package com.onlineclass.instructor.controller;
+package com.onlineclass.teacher.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LectureUploadServlet
  */
-@WebServlet("/instructor/lectureupload.do")
+@WebServlet("/teacher/lectureupload.do")
 public class LectureUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +26,7 @@ public class LectureUploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/instructor/lectureupload.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/teacher/lectureupload.jsp").forward(request, response);
 	}
 
 	/**
