@@ -19,7 +19,7 @@
 	.ql-size-huge { font-size: 32px;
 </style>
 <body>
-	<form action="${pageContext.request.contextPath}/share/postwriteend.do" method="post" onsubmit="return addContent();">
+	<form action="${pageContext.request.contextPath}/share/postwriteend.do" method="post" enctype="multipart/form-data" onsubmit="return addContent();">
 		<h2>자유 게시판 글쓰기</h2>
 		<input type="hidden" name="uploader" value="${user.userinfo.stuCode}">
 		<input type="text" name="title" id="title" placeholder="제목">
@@ -57,11 +57,11 @@
 			const contents = quill.getSemanticHTML();
 			document.getElementById("contents").value=contents;
 			if(document.getElementById("title").value==""){
-				alert("헉!");
+				alert("제목을 입력해주세요!");
 				return false;
 			}
 			if(document.getElementById("contents").value=="<p></p>"){
-				alert("헉!");
+				alert("내용을 입력해주세요!");
 				return false;
 			}
 		}

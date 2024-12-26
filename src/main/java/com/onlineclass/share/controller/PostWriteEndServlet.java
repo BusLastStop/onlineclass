@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.onlineclass.share.service.ShareService;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class PostWriteEndServlet
@@ -31,17 +33,27 @@ public class PostWriteEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String title = request.getParameter("title");
-		String content = request.getParameter("contents");
-		String upload = request.getParameter("upload");
-		String code = request.getParameter("uploader");
+		String path = getServletContext().getRealPath("/resources/upload/post");
+		System.out.println(path);
+		MultipartRequest mr = new MultipartRequest(
+				request,
+				path,
+				1024*1024*100,
+				"utf-8",
+				new DefaultFileRenamePolicy()
+				);
+		
+		String title = mr.getParameter("title");
+		String content = mr.getParameter("contents");
+		String code = mr.getParameter("uploader");
+		String oriUpload = mr.getOriginalFileName("upload");
+		String renameUpload = mr.getFilesystemName("upload");
 		Map<String,String> data = new HashMap<>();
 		data.put("title",title);
 		data.put("content",content);
 		data.put("code",code);
-		if(upload!=null) {
-			System.out.println(upload);
-			data.put("upload", upload);
+		if(renameUpload!=null) {
+			data.put("upload", renameUpload);
 		}else{
 			data.put("upload", null);
 		}
