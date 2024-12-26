@@ -73,7 +73,7 @@
 		</div>
 		<div id="buttons">
 			<div class="left-side">
-				<button onclick="location.assign('${pageContext.request.contextPath}/share/board.do')">목록</button>
+				<button onclick="location.assign('${pageContext.request.contextPath}/share/post.do')">목록</button>
 			</div>
 			<div class="right-side">
 				<c:if test="${not empty sessionScope.user}">
@@ -98,6 +98,7 @@
 						<td class="comment-report"><button class="report">신고</button></td>
 					</c:if>
 					<c:if test="${empty sessionScope.user}">
+						<td></td>
 						<td></td>
 						<td></td>
 					</c:if>

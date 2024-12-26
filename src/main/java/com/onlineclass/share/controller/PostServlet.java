@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardDetailServlet
+ * Servlet implementation class BoardServlet
  */
-@WebServlet("/share/boarddetail.do")
-public class BoardDetailServlet extends HttpServlet {
+@WebServlet("/share/post.do")
+public class PostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailServlet() {
+    public PostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class BoardDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/share/boarddetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/share/post.jsp").forward(request, response);
 	}
 
 	/**

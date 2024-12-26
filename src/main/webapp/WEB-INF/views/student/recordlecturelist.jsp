@@ -33,7 +33,6 @@
 		border-bottom-color:#ffccbc;
 		margin:20px 0 30px 0;
 	}
-	#record-container h1{ width:80%;margin:auto; }
 	#recordList{ width:80%;margin:auto;z-index:-1; }
 	#recordList .contents{ display:inline-block;width:23%;padding:0;margin:10px;z-index:-1;cursor:pointer; }
 	.contents img{ width:60%;min-width:100px;max-height:180px;min-height:70px; }
@@ -54,13 +53,13 @@
 				<div style="display:flex;">
 					<div style="display:flex;flex-direction:column;">
 						<label><input type="checkbox" name="kor" value="국어">국어</label>
-						<label><input type="checkbox" name="kor" value="영어">국어</label>
-						<label><input type="checkbox" name="kor" value="수학">국어</label>
+						<label><input type="checkbox" name="kor" value="영어">영어</label>
+						<label><input type="checkbox" name="kor" value="수학">수학</label>
 					</div>
 					<div style="display:flex;flex-direction:column;">
-						<label><input type="checkbox" name="kor" value="한국사">국어</label>
-						<label><input type="checkbox" name="kor" value="사회">국어</label>
-						<label><input type="checkbox" name="kor" value="과학">국어</label>
+						<label><input type="checkbox" name="kor" value="한국사">한국사</label>
+						<label><input type="checkbox" name="kor" value="사회">사회</label>
+						<label><input type="checkbox" name="kor" value="과학">과학</label>
 					</div>
 				</div>
 			</div>
@@ -117,7 +116,9 @@
 		</div>
 	</form>
 	<div id="record-container">
-		<h1>녹화강의 목록</h1>
+		<div style="width:80%;margin:auto;">
+			<h1>녹화강의 목록</h1>
+		</div>
 		<div id="recordList">
 			<div class="contents" onclick="window.open('${path}/student/lecturedetails.do','_blank','width=1000,height=800');">
 				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">

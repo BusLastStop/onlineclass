@@ -31,7 +31,7 @@
 		border-bottom-style:solid;
 		border-top-color:#ffccbc;
 		border-bottom-color:#ffccbc;
-		margin:20px 0 20px 0;
+		margin:20px 0 30px 0;
 	}
 	#recordList{ width:80%;margin:auto;z-index:-1; }
 	#recordList .contents{ display:inline-block;width:23%;padding:0;margin:10px;z-index:-1;cursor:pointer; }
@@ -40,7 +40,7 @@
 	.contents p{ margin:0; }
 </style>
 <section>
-	<form id="searchForm" action="" method="get">
+	<!-- <form id="searchForm" action="" method="get">
 		<div id="search">
 			<a href="#" onclick="openFilter();">필터</a>
 			<input type="hidden" id="useFilter" name="useFilter" value="false">
@@ -114,8 +114,30 @@
 				<input type="text" name="instructorName">
 			</div>
 		</div>
-	</form>
+	</form> -->
 	<div id="record-container">
+		<c:if test="${user.userType eq '학생'}">
+			<div style="width:80%;margin:auto;">
+				<h2 style="display:inline-block;width:83%;">수강한 강의 목록</h2>
+				<select name="type" style="display:inline-block;">
+					<option value="" disabled selected hidden>선택</option>
+					<option value="allLecture">전체 강의</option>
+					<option value="recordLecture">녹화 강의</option>
+					<option value="realTimeLecture">실시간 강의</option>
+				</select>
+			</div>
+		</c:if>
+		<c:if test="${user.userType eq '강사'}">
+			<div style="width:80%;margin:auto;">
+				<h2 style="display:inline-block;width:83%;">나의 강의 목록</h2>
+				<select name="type" style="display:inline-block;">
+					<option value="" disabled selected hidden>선택</option>
+					<option value="allLecture">전체 강의</option>
+					<option value="recordLecture">녹화 강의</option>
+					<option value="realTimeLecture">실시간 강의</option>
+				</select>
+			</div>
+		</c:if>
 		<div id="recordList">
 			<div class="contents"><!-- 클릭하면 영상 창 띄우기 -->
 				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">

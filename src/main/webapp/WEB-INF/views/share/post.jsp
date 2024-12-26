@@ -36,7 +36,7 @@
 		<table>
 			<tr>
 				<td class="category">카테고리</td>
-				<td class="title"><a href="${path}/share/boarddetail.do">게시글 확인 페이지 들어가기</a></td>
+				<td class="title"><a href="${path}/share/postdetail.do">게시글 확인 페이지 들어가기</a></td>
 				<td class="nickname">닉네임</td>
 				<td class="date">날짜</td>
 				<td class="readCount">조회수</td>

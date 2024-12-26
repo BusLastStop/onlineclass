@@ -15,7 +15,7 @@
 		font-optical-sizing: auto;
 		font-weight: 500;
 		font-style: normal;
-		border:1px solid #ff8a65;
+		/* border:1px solid #ff8a65; */
 		color:#212121;
 	}
 	body{ overflow-y:scroll;overflow-x:hidden; }
@@ -24,7 +24,7 @@
 	div#headerMenu{display:flex; justify-content: space-around;align-items: center;width:80%}
 	div#footer{display:flex;justify-content:space-around;align-items:center}
 	#headerUser a{ margin-right:10px; }
-	#headerMenu>*{cursor:pointer;}
+	#headerMenu *{cursor:pointer;min-width:75px;}
 	#category{display:flex;padding:0;margin-right:5%;justify-contents:center;align-items:center;}
 	#category>li{margin-left:10px;margin-right:10px}
 	.writer-container{background-color:f5f5f5;}
@@ -77,7 +77,7 @@
 		</h2>
 		<h2><a href="${path}/member/realtimelecturelist.do">실시간 강의</a></h2>
 		<h2><a href="${path}/member/mylecturelist.do">나의 강의정보</a></h2>
-		<h2><a href="${path}/share/board.do">정보공유</a></h2>
+		<h2><a href="${path}/share/post.do">정보공유</a></h2>
 		<h2>마이페이지</h2>
 	</div>
 	<script>
