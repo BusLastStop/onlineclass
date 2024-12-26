@@ -97,11 +97,6 @@
 						<!-- <td class="comment-delete"><button>삭제</button></td> -->
 						<td class="comment-report"><button class="report">신고</button></td>
 					</c:if>
-					<c:if test="${empty sessionScope.user}">
-						<td></td>
-						<td></td>
-						<td></td>
-					</c:if>
 				</tr>
 				<tr>
 					<td class="comment-title">닉네임몇글자까지가능</td>
@@ -112,11 +107,6 @@
 						<td class="comment-reply"><button>답글</button></td>
 						<!-- <td class="comment-delete"><button>삭제</button></td> -->
 						<td class="comment-report"><button class="report">신고</button></td>
-					</c:if>
-					<c:if test="${empty sessionScope.user}">
-						<td></td>
-						<td></td>
-						<td></td>
 					</c:if>
 				</tr>
 			</table>

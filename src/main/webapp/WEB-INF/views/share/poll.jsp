@@ -17,6 +17,14 @@
 		width:90%;
 		margin:auto;
 	}
+	div#boardList{ min-height:600px;}
+	div#boardList>h2{ display:inline-block;margin:10px 0 10px 10%; }
+	div#boardList>table{ margin:auto;width:90%; }
+	div#boardList>#board-category{ height:25px;margin:0 0 10px 10%; }
+	table .title{ width:auto;padding-left:5px; }
+	table .nickname{ width:10%;padding-left:5px; }
+	table .createDate{ width:10%;padding-left:5px; }
+	table .closed{ width:5%;text-align:center; }
 	#vote{
 		width:90%;
 		height:900px;
@@ -70,51 +78,24 @@
 <section>
 	<jsp:include page="/WEB-INF/views/common/shareheader.jsp"/>
 	<div id="content-container">
-		<div id="title">
-			<h2>투표</h2>
-		</div>
-		<div id="vote">
-			<div class="content">
-				<h3>투표 제목</h3>
-				<div>
-					<p>투표 내용</p>
-					<button onclick="window.open('about:blank','_blank','width=500,height=600');">투표하기</button>
-				</div>
+		<div id="boardList">
+			<div id="title">
+				<h2>투표</h2>
 			</div>
-			<div class="content">
-				<h3>투표 제목</h3>
-				<div>
-					<p>투표 내용</p>
-					<button onclick="window.open('about:blank','_blank','width=500,height=600');">투표하기</button>
-				</div>
-			</div>
-			<div class="content">
-				<h3>투표 제목</h3>
-				<div>
-					<p>투표 내용</p>
-					<button onclick="window.open('about:blank','_blank','width=500,height=600');">투표하기</button>
-				</div>
-			</div>
-			<div class="content">
-				<h3>투표 제목</h3>
-				<div>
-					<p>투표 내용</p>
-					<button onclick="window.open('about:blank','_blank','width=500,height=600');">투표하기</button>
-				</div>
-			</div><div class="content">
-				<h3>투표 제목</h3>
-				<div>
-					<p>투표 내용</p>
-					<button onclick="window.open('about:blank','_blank','width=500,height=600');">투표하기</button>
-				</div>
-			</div>
-			<div class="content">
-				<h3>투표 제목</h3>
-				<div>
-					<p>투표 내용</p>
-					<button onclick="window.open('about:blank','_blank','width=500,height=600');">투표하기</button>
-				</div>
-			</div>
+			<table>
+				<tr>
+					<td class="title"><a href="#">투표 확인 페이지 들어가기(링크 만들어야 함)</a></td>
+					<td class="nickname">작성자</td>
+					<td class="createDate">생성일</td>
+					<td class="closed">마감여부</td>
+				</tr>
+				<tr>
+					<td class="title">투표함 만들기(링크없음)</td>
+					<td class="nickname">작성자</td>
+					<td class="createDate">생성일</td>
+					<td class="closed">마감여부</td>
+				</tr>
+			</table>
 		</div>
 		<div style="text-align:right;">
 			<button id="vote-generator">투표 생성</button>

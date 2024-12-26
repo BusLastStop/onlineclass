@@ -55,7 +55,7 @@
 	<div class="board-container">
 		<div id="write">
 			<c:if test="${user.userType eq '학생'}">
-				<button>글쓰기</button>
+				<button onclick="location.assign('${path}/post/postwrite.do')">글쓰기</button>
 			</c:if>
 		</div>
 		<p id="pagination">페이지네이션 공간 만들기</p>
