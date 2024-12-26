@@ -22,7 +22,8 @@
 	div#search>input{ width:40%;height:25px;margin:3px; }
 	div#search>button{ width:50px;height:30px; }
 	div#search>select{ height:25px; }
-	#pagination{ height:25px; }
+	.pagination{ display:flex;justify-content:center;align-items:center;height:25px; }
+	.page-item{ display:inline-block; }
 	p{ margin:0;text-align:center; }
 	button{ background-color:#ffccbd;border-radius:3px; }
 </style>
@@ -34,6 +35,20 @@
 			<option value="category">카테고리</option>
 		</select>
 		<table>
+			<c:if test="${not empty postList}">
+				<c:forEach var="post" items="${postList}">
+					<tr>
+						<td class="category">카테고리</td>
+						<td class="title"><a href="${path}/share/postdetail.do?posCode=${post.posCode}">${post.posTitle}</a></td>
+						<td class="nickname">${post.student.stuName}</td>
+						<td class="date">${post.posDateTime}</td>
+						<td class="readCount">조회수</td>
+						<td class="commentCount">댓글수</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</table>
+		<%-- <table>
 			<tr>
 				<td class="category">카테고리</td>
 				<td class="title"><a href="${path}/share/postdetail.do">게시글 확인 페이지 들어가기</a></td>
@@ -50,7 +65,7 @@
 				<td class="readCount">조회수</td>
 				<td class="commentCount">댓글수</td>
 			</tr>
-		</table>
+		</table> --%>
 	</div>
 	<div class="board-container">
 		<div id="write">
@@ -58,7 +73,7 @@
 				<button onclick="location.assign('${path}/post/postwrite.do')">글쓰기</button>
 			</c:if>
 		</div>
-		<p id="pagination">페이지네이션 공간 만들기</p>
+		${pageBar}
 		<div id="search">
 			<select>
 				<option>게시글 제목</option>

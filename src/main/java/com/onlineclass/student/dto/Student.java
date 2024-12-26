@@ -1,6 +1,9 @@
 package com.onlineclass.student.dto;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.onlineclass.share.dto.Post;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +34,5 @@ public class Student {
 	private int stuTutAccumMatchTime;
 	private int stuTutAccumMatchCount;
 	private int stuTutIdenticalMatchCount;
+	private List<Post> stuPostList;
 }
