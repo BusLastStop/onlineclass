@@ -22,8 +22,8 @@
 	div#boardList>table{ margin:auto;width:90%; }
 	div#boardList>#board-category{ height:25px;margin:0 0 10px 10%; }
 	table .title{ width:auto;padding-left:5px; }
-	table .nickname{ width:10%;padding-left:5px; }
-	table .createDate{ width:10%;padding-left:5px; }
+	table .nickname{ width:10%;padding-left:5px;text-align:center; }
+	table .createDate{ width:10%;padding-left:5px;text-align:center; }
 	table .closed{ width:5%;text-align:center; }
 	#vote{
 		width:90%;
