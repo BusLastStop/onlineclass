@@ -7,6 +7,7 @@
 	section{ display:flex;flex-direction:column;align-items:center;min-height:700px; }
 	div#board-title{ width:80%;padding:10px 0 10px 0; }
 	div#board-title>h2{ display:inline-block;margin:0 0 10px 10%; }
+	div#board-title p{ margin:0;text-align:center; }
 	div#board-title>#board-category{ height:25px;margin:0 0 10px 10%; }
 	div.left-side{ display:inline-block;text-align:left;margin-left:10%;width:10%; }
 	div.left-side>*{ display:inline-block; }
@@ -23,8 +24,11 @@
 		font-weight: 400;
 		font-style: normal;
 	}
-	div.board-container #post{ display:flex;justify-content:center;align-items:center; }
-	div.board-container #comment{ display:flex;justify-content:center;align-items:center;margin-top:50px; }
+	div.board-container p{ padding:3px;margin:0; }
+	div.board-container #post{ width:80%;min-height:400px;margin:auto; }
+	div.board-container #comment{ display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:50px; }
+	div.board-container #comment form{ display:flex;justify-content:center;align-items:center;margin-bottom:20px; }
+	div.board-container #comment form button{ width:80px;height:50px;margin-left:15px; }
 	div.board-container #comment table{ width:80%; }
 	div#buttons{ height:50px; }
 	div#buttons button{ width:50px; }
@@ -45,31 +49,28 @@
 	div#search>button{ width:50px; }
 	div#search>select{ height:25px; }
 	#pagination{ height:25px; }
-	p{ margin:0;text-align:center; }
 	button{ background-color:#ffccbd;height:30px; }
 	button.report{ background-color:#ff9e80 }
+	.ql-size-small { font-size: 12px; }
+	.ql-size-large { font-size: 24px; }
+	.ql-size-huge { font-size: 32px; }
 </style>
 <section>
 	<jsp:include page="/WEB-INF/views/common/shareheader.jsp"/>
 	<div id="board-title">
-		<h2>제목에 아무 내용 써보기</h2><br>
+		<h2>${post.posTitle}</h2><br>
 		<div class="left-side">
-			<p>닉네임</p>
+			<p>${post.student.stuName}</p>
 		</div>
 		<div class="right-side">
-			<p>조회 0</p>
-			<p>댓글 0</p>
-			<p>2024-12-16</p>
-			<p>시간?</p>
+			<!-- <p>조회 0</p>
+			<p>댓글 0</p> -->
+			<p>${post.posDateTime}</p>
 		</div>
 	</div>
 	<div class="board-container">
 		<div id="post">
-			<pre id="content">오늘도 졸리다. 아침에 DB 사용 허가가 났다고 DB를 연결하라고 한다.
-방금 로그인을 했는데 로그인이 안된다. 1시간만 시간을 주면 좋겠다. 그 시간에 자게...
-물론 1시간을 자도 졸리다 할 것 같아서 안 자는게 맞겠지만
-권한을 줬다고 하니 지금 들어가 봐야겠다. 로그인이 되길래 DB를 연결했다.
-졸리다... 라는 생각밖에 안 나... 이제 자러 가야지 😴</pre>
+			${post.posContent}
 		</div>
 		<div id="buttons">
 			<div class="left-side">
@@ -86,6 +87,10 @@
 			</div>
 		</div>
 		<div id="comment">
+			<form action="#" method="post">
+				<textarea rows="3" cols="120" placeholder="댓글을 입력해 주세요"></textarea>
+				<button type="submit">댓글 입력</button>
+			</form>
 			<table>
 				<tr>
 					<td class="comment-title">BS어마스터</td>

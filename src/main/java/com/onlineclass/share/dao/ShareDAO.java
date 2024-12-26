@@ -16,11 +16,15 @@ public class ShareDAO {
 	public List<Post> selectPostList(SqlSession session, Map<String, Integer> page){
 		int cPage = page.get("cPage");
 		int numPerPage = page.get("numPerPage");
-		RowBounds rb = new RowBounds((cPage-1)*numPerPage+1,cPage*numPerPage);
+		RowBounds rb = new RowBounds((cPage-1)*numPerPage,numPerPage);
 		return session.selectList("share.selectPostList",null,rb);
 	}
 	
 	public int postCount(SqlSession session) {
 		return session.selectOne("share.postCount");
+	}
+	
+	public Post selectOnePost(SqlSession session, String code) {
+		return session.selectOne("share.selectOnePost",code);
 	}
 }

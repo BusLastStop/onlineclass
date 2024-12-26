@@ -37,4 +37,11 @@ public class ShareService {
 		session.close();
 		return count;
 	}
+	
+	public Post selectOnePost(String code) {
+		SqlSession session = getSession();
+		Post post = dao.selectOnePost(session, code);
+		session.close();
+		return post;
+	}
 }

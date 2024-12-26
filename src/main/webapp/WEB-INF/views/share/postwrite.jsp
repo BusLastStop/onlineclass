@@ -16,7 +16,7 @@
 	button{ background-color:#eeeeee;border:1px solid #cccccc; }
 	.ql-size-small { font-size: 12px; }
 	.ql-size-large { font-size: 24px; }
-	.ql-size-huge { font-size: 32px;
+	.ql-size-huge { font-size: 32px; }
 </style>
 <body>
 	<form action="${pageContext.request.contextPath}/share/postwriteend.do" method="post" enctype="multipart/form-data" onsubmit="return addContent();">
