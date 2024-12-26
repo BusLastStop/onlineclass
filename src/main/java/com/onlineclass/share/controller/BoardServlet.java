@@ -1,4 +1,4 @@
-package com.onlineclass.member.controller;
+package com.onlineclass.share.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginPageServlet
+ * Servlet implementation class BoardServlet
  */
-@WebServlet("/member/logout.do")
-public class LogoutPageServlet extends HttpServlet {
+@WebServlet("/share/board.do")
+public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutPageServlet() {
+    public BoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +26,7 @@ public class LogoutPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().removeAttribute("user");
-		String msg, loc;
-		msg = "로그아웃 되었습니다!";
-		loc = "/";
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/share/board.jsp").forward(request, response);
 	}
 
 	/**
