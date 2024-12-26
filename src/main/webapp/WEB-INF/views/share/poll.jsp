@@ -10,8 +10,6 @@
 	#content-container{
 		width:80%;
 		height:110%;
-		min-height:1000px;
-		max-height:1500px;
 	}
 	#content-container #title{
 		width:90%;
