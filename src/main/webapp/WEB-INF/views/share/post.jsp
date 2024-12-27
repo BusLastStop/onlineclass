@@ -17,14 +17,14 @@
 	table .commentCount{ width:5%;text-align:center; }
 	div.board-container{ width:80%; }
 	div#write{ text-align:right;height:30px; }
-	div#write>button{ margin:3px 10% 3px 3px;width:70px;height:30px; }
+	div#write>button{ margin:0 10% 0 3px;width:70px;height:30px; }
 	div#search{ display:flex;justify-content:center;align-items:center; }
 	div#search>input{ width:40%;height:25px;margin:3px; }
 	div#search>button{ width:50px;height:30px; }
 	div#search>select{ height:25px; }
 	#pagination{ height:25px; }
 	p{ margin:0;text-align:center; }
-	button{ background-color:#ffccbd; }
+	button{ background-color:#ffccbd;border-radius:3px; }
 </style>
 <section>
 	<jsp:include page="/WEB-INF/views/common/shareheader.jsp"/>
@@ -55,7 +55,7 @@
 	<div class="board-container">
 		<div id="write">
 			<c:if test="${user.userType eq '학생'}">
-				<button>글쓰기</button>
+				<button onclick="location.assign('${path}/post/postwrite.do')">글쓰기</button>
 			</c:if>
 		</div>
 		<p id="pagination">페이지네이션 공간 만들기</p>

@@ -15,7 +15,7 @@
 		font-optical-sizing: auto;
 		font-weight: 500;
 		font-style: normal;
-		/* border:1px solid #ff8a65; */
+		border:1px solid #ff8a65;
 		color:#212121;
 	}
 	body{ overflow-y:scroll;overflow-x:hidden; }

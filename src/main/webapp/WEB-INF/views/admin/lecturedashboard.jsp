@@ -69,7 +69,7 @@
 				<a href="${pageContext.request.contextPath}" style="height:60px;"><img src="${pageContext.request.contextPath}/resources/images/red.png" width="100" height="60"></a>	
 			</div>
 			<h3 onclick="lectureinfo();">강의 정보</h3>
-			<h3>강의 업로드 승인</h3>
+			<h3 onclick="lectureupload();">강의 업로드 승인</h3>
 			<h3>녹화 강의 영상</h3>
 			<h3>실시간 강의 링크</h3>
 		</div>
@@ -198,7 +198,96 @@
 				$tr.append($th);
 				$th = $("<th>").text("강사 번호")
 				$tr.append($th).appendTo($table);
+				/* if(data!=null){
+					data.forEach(info=>{
+						$tr = $("<tr>");
+						info.forEach(v=>{
+							const $td = $("<td>").text(v);
+							$tr.append($td);
+						});
+						$table.append($tr);
+					});
+				} */
 				$div.append($table);
+				$("#lecture-dashboard").html("");
+				$("#lecture-dashboard").append($h1);
+				$("#lecture-dashboard").append($div);
+			});
+		}
+		const lectureupload=()=>{
+			$.post("${path}/admin/lecturelist.do",{menu:"upload"},data=>{
+				console.log(data);
+				const $h1 = $("<h1>").text("업로드 요청 목록");
+				const $div = $("<div>").css("display","inline-block");
+				const $table = $("<table>");
+				let $tr = $("<tr>");
+				let $th = $("<th>").text("요청 코드");
+				$tr.append($th);
+				$th = $("<th>").text("녹화 강의 코드");
+				$tr.append($th);
+				$th = $("<th>").text("강사 코드(강사명으로 해도 됨 근데 귀찮다)");
+				$tr.append($th).appendTo($table);
+				/* if(data!=null){
+					data.forEach(upload=>{
+						$tr = $("<tr>");
+						upload.forEach(v=>{
+							const $td = $("<td>").text(v);
+							$td.append($td);
+						});
+						$table.append($tr);
+					});
+				} */
+				$div.append($table);
+				$("#lecture-dashboard").html("");
+				$("#lecture-dashboard").append($h1);
+				$("#lecture-dashboard").append($div);
+			});
+		}
+		const recordlecture=()=>{
+			$.post("${path}/admin/lecturelist.do",{menu:"record"},data=>{
+				const $h1 = $("<h1>").text("녹화 강의 목록");
+				const $div = $("<div>").css("display","inline-block");
+				/* if(data!=null){
+					data.forEach(record=>{
+						const recordContainer = $("<div>").css("display","inline-block");
+						const $img = $("<img>").attr("src","");
+						const title = $("<h4>").text("강의 제목");
+						const container = $("<div>");
+						const instructor = $("<h4>").text("강사명");
+						const date = $("<h4>").text("날짜");
+						container.append(instructor);
+						container.append(date);
+						recordContainer.append($img);
+						recordContainer.append(title);
+						recordContainer.append(container);
+						$div.append(recordContainer);
+					});
+				} */
+				$("#lecture-dashboard").html("");
+				$("#lecture-dashboard").append($h1);
+				$("#lecture-dashboard").append($div);
+			});
+		}
+		const realtimelecture=()=>{
+			$.post("${path}/admin/lecturelist.do",{menu:"realtime"},data=>{
+				const $h1 = $("<h1>").text("녹화 강의 목록");
+				const $div = $("<div>").css("display","inline-block");
+				/* if(data!=null){
+					data.forEach(record=>{
+						const recordContainer = $("<div>").css("display","inline-block");
+						const $img = $("<img>").attr("src","");
+						const title = $("<h4>").text("강의 제목");
+						const container = $("<div>");
+						const instructor = $("<h4>").text("강사명");
+						const date = $("<h4>").text("날짜");
+						container.append(instructor);
+						container.append(date);
+						recordContainer.append($img);
+						recordContainer.append(title);
+						recordContainer.append(container);
+						$div.append(recordContainer);
+					});
+				} */
 				$("#lecture-dashboard").html("");
 				$("#lecture-dashboard").append($h1);
 				$("#lecture-dashboard").append($div);
