@@ -1,29 +1,23 @@
-package com.onlineclass.share.controller;
+package com.onlineclass.member.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.onlineclass.share.dto.Post;
-import com.onlineclass.share.dto.PostReply;
-import com.onlineclass.share.service.ShareService;
-
 /**
- * Servlet implementation class BoardDetailServlet
+ * Servlet implementation class MyPageServlet
  */
-@WebServlet("/share/postdetail.do")
-public class PostDetailServlet extends HttpServlet {
+@WebServlet("/member/mypage.do")
+public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostDetailServlet() {
+    public MyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +26,7 @@ public class PostDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String code = request.getParameter("posCode");
-		Post post = new ShareService().selectOnePost(code);
-		List<PostReply> replies = new ShareService().selectCommentList(code);
-		
-//		Post post = new ShareService().postAndReplies(code);
-		
-		request.setAttribute("post", post);
-		request.setAttribute("replies", replies);
-		request.getRequestDispatcher("/WEB-INF/views/share/postdetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/mypage.jsp").forward(request, response);
 	}
 
 	/**

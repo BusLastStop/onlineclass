@@ -78,7 +78,7 @@
 		<h2><a href="${path}/member/realtimelecturelist.do">실시간 강의</a></h2>
 		<h2><a href="${path}/member/mylecturelist.do">나의 강의정보</a></h2>
 		<h2><a href="${path}/share/post.do">정보공유</a></h2>
-		<h2>마이페이지</h2>
+		<h2><a href="${path}/member/mypage.do">마이페이지</a></h2>
 	</div>
 	<script>
 		const dropdownList=()=>{

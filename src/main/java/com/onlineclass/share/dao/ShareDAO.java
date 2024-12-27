@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.onlineclass.share.dto.Post;
+import com.onlineclass.share.dto.PostReply;
 
 public class ShareDAO {
 	public int postWrite(SqlSession session, Map<String,String> data) {
@@ -27,4 +28,16 @@ public class ShareDAO {
 	public Post selectOnePost(SqlSession session, String code) {
 		return session.selectOne("share.selectOnePost",code);
 	}
+	
+	public int postReply(SqlSession session, PostReply reply) {
+		return session.insert("share.postReply",reply);
+	}
+	
+	public List<PostReply> selectReplyList(SqlSession session, String code){
+		return session.selectList("share.selectReplyList",code);
+	}
+	
+//	public Post postAndReplies(SqlSession session, String code) {
+//		return session.selectOne("share.postAndReplies",code);
+//	}
 }

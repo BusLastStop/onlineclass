@@ -27,14 +27,15 @@
 	div.board-container p{ padding:3px;margin:0; }
 	div.board-container #post{ width:80%;min-height:400px;margin:auto; }
 	div.board-container #comment{ display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:50px; }
-	div.board-container #comment form{ display:flex;justify-content:center;align-items:center;margin-bottom:20px; }
+	div.board-container #comment form{ display:flex;justify-content:center;align-items:center; }
 	div.board-container #comment form button{ width:80px;height:50px;margin-left:15px; }
 	div.board-container #comment table{ width:80%; }
+	div.board-container #comment #formMargin{ margin:10px 0 20px 0; }
 	div#buttons{ height:50px; }
 	div#buttons button{ width:50px; }
 	div#comment>table tr{ height:40px; }
-	div#comment>table .comment-title{ width:15%;text-align:center; }
-	div#comment>table .comment-content{ width:60%;padding-left:5px; }
+	div#comment>table .comment-title{ width:12%;text-align:center; }
+	div#comment>table .comment-content{ width:60%; }
 	div#comment>table .comment-date{ width:10%;text-align:center; }
 	div#comment>table .comment-report{ width:5%;text-align:center; }
 	div#comment>table .comment-delete{ width:5%;text-align:center; }
@@ -42,8 +43,10 @@
 	div#comment>table .comment-reply button{ width:50px; }
 	div#comment>table .comment-delete button{ width:50px; }
 	div#comment>table .comment-report button{ width:50px; }
-	div#write{ text-align:right; }
-	div#write>button{ margin:3px 10% 3px 3px;width:70px;height:25px; }
+	div#comment>table .comment-reply-form{ width:100%;height:75px; }
+	.commnet-reply-form td{ width:100%; }
+	table .level1 .comment-content{ padding-left:5px; }
+	table .level2 .comment-content{ font-size:14px;padding-left:30px; }
 	div#search{ display:flex;justify-content:center;align-items:center; }
 	div#search>input{ width:40%;height:25px;margin:3px; }
 	div#search>button{ width:50px; }
@@ -87,34 +90,82 @@
 			</div>
 		</div>
 		<div id="comment">
-			<form action="#" method="post">
-				<textarea rows="3" cols="120" placeholder="댓글을 입력해 주세요"></textarea>
-				<button type="submit">댓글 입력</button>
-			</form>
-			<table>
-				<tr>
-					<td class="comment-title">BS어마스터</td>
-					<td class="comment-content">닉네임님~ 졸면 안돼요~</td>
-					<td class="comment-date">2024-12-17</td>
-					<c:if test="${not empty sessionScope.user}">
-						<td></td>
-						<td class="comment-reply"><button>답글</button></td>
-						<!-- <td class="comment-delete"><button>삭제</button></td> -->
-						<td class="comment-report"><button class="report">신고</button></td>
+			<c:if test="${not empty user}">
+				<form action="${path}/share/postcomment.do" method="post" id="formMargin">
+					<input type="hidden" name="posCode" value="${post.posCode}">
+					<input type="hidden" name="level" value="1">
+					<c:if test="${user.userType eq '학생'}">
+						<input type="hidden" name="stuCode" value="${user.userinfo.stuCode}">
 					</c:if>
-				</tr>
-				<tr>
-					<td class="comment-title">닉네임몇글자까지가능</td>
-					<td class="comment-content">나는 하루종일 잘 수 있는데</td>
-					<td class="comment-date">2024-12-17</td>
-					<c:if test="${not empty sessionScope.user}">
-						<td></td>
-						<td class="comment-reply"><button>답글</button></td>
-						<!-- <td class="comment-delete"><button>삭제</button></td> -->
-						<td class="comment-report"><button class="report">신고</button></td>
+					<c:if test="${user.userType eq '강사'}">
+						<input type="hidden" name="teaCode" value="${user.userinfo.teaCode}">
 					</c:if>
-				</tr>
-			</table>
+					<textarea rows="3" cols="120" name="content" placeholder="댓글을 입력해 주세요"></textarea>
+					<button type="submit">댓글 입력</button>
+				</form>
+			</c:if>
+			<c:if test="${not empty replies}">
+				<table>
+					<c:forEach var="reply" items="${replies}">
+						<tr class="level${reply.posRepLevel}">
+							<c:if test="${reply.student!=null}">
+								<script>console.log("학생")</script>
+								<td class="comment-title">${reply.student.stuName}</td>
+							</c:if>
+							<c:if test="${reply.teacher!=null}">
+								<script>console.log("강사")</script>
+								<td class="comment-title">${reply.teacher.teaName}</td>
+							</c:if>
+							<td class="comment-content">${reply.posRepContent}</td>
+							<td class="comment-date">${reply.posRepDateTime}</td>
+							<c:if test="${not empty sessionScope.user}">
+								<c:if test="${user.userType eq '학생'}">
+									<c:if test="${user.userinfo.stuCode eq reply.stuCode}">
+										<td class="comment-delete"><button>삭제</button></td>
+									</c:if>
+									<c:if test="${user.userinfo.stuCode ne reply.stuCode}">
+										<td></td>
+									</c:if>
+								</c:if>
+								<c:if test="${user.userType eq '강사'}">
+									<c:if test="${user.userinfo.teaCode eq reply.teaCode}">
+										<td class="comment-delete"><button>삭제</button></td>
+									</c:if>
+									<c:if test="${user.userinfo.teaCode ne reply.teaCode}">
+										<td></td>
+									</c:if>
+								</c:if>
+								<c:if test="${reply.posRepLevel==1}">
+									<td class="comment-reply"><button onclick="$('#comment${reply.posRepCode}').css('display','');">답글</button></td>
+								</c:if>
+								<c:if test="${reply.posRepLevel!=1}">
+									<td></td>
+								</c:if>
+								<td class="comment-report"><button class="report">신고</button></td>
+							</c:if>
+						</tr>
+						<c:if test="${reply.posRepLevel==1}">
+							<tr id="comment${reply.posRepCode}" class="comment-reply-form" style="display:none;">
+								<td colspan="6">
+									<form action="${path}/share/postcomment.do" method="post">
+										<input type="hidden" name="posCode" value="${post.posCode}">
+										<input type="hidden" name="level" value="2">
+										<input type="hidden" name="refCode" value="${reply.posRepCode}">
+										<c:if test="${user.userType eq '학생'}">
+											<input type="hidden" name="stuCode" value="${user.userinfo.stuCode}">
+										</c:if>
+										<c:if test="${user.userType eq '강사'}">
+											<input type="hidden" name="teaCode" value="${user.userinfo.teaCode}">
+										</c:if>
+										<textarea rows="3" cols="120" name="content" placeholder="댓글을 입력해 주세요"></textarea>
+										<button type="submit">댓글 입력</button>
+									</form>
+								</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</table>
+			</c:if>
 		</div>
 	</div>
 </section>

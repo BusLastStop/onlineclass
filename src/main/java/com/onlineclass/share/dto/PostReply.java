@@ -1,9 +1,9 @@
 package com.onlineclass.share.dto;
 
 import java.sql.Date;
-import java.util.List;
 
 import com.onlineclass.student.dto.Student;
+import com.onlineclass.teacher.dto.Teacher;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,13 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Post {
+public class PostReply {
+	private String posRepCode;
+	private String posRepContent;
+	private Date posRepDateTime;
+	private int posRepLevel;
+	private String posRepRefCode;
 	private String posCode;
-	private String posTitle;
-	private String posContent;
-	private String posUpload;
-	private Date posDateTime;
 	private String stuCode;
+	private String teaCode;
 	private Student student;
-	private List<PostReply> replies;
+	private Teacher teacher;
 }
