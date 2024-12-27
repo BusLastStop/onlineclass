@@ -96,11 +96,17 @@
 			</table>
 		</div>
 		<div style="text-align:right;">
-			<button id="vote-generator">투표 생성</button>
+			<button id="vote-generator" onclick="createNewPoll(event);"]>투표 생성</button>
 		</div>
 		<div style="text-align:center;">
 			<p style="margin:5px 0 5px 0;">페이지네이션 공간</p>
 		</div>
 	</div>
 </section>
+
+<script>
+	const createNewPoll=(e)=>{
+		location.assign('${pageContext.request.contextPath}/share/poll/creation');
+	}
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
