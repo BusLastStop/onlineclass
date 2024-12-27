@@ -33,6 +33,33 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// login test
+		String userType = request.getParameter("userType");
+		if(userType.equals("학생")) {
+			Map<String,Object> userSession = Map.of("userType",userType,"userinfo",new Student());
+			request.getSession().setAttribute("user", userSession);
+			String msg, loc;
+			msg = userType + "로그인(임시)!";
+			loc = "/";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		}else if(userType.equals("강사")) {
+			Map<String,Object> userSession = Map.of("userType",userType,"userinfo",new Teacher());
+			request.getSession().setAttribute("user", userSession);
+			String msg, loc;
+			msg = userType + "로그인(임시)!";
+			loc = "/";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userType = request.getParameter("userType");
 		String id = request.getParameter("userId");
 		String pw = request.getParameter("userPw");
@@ -79,17 +106,7 @@ public class LoginServlet extends HttpServlet {
 			Map<String, Object> userSession = Map.of("userType", userType, "userinfo", "userinfo");
 			request.getSession().setAttribute("user", userSession);
 			request.getRequestDispatcher("/admin/lecturelist.do").forward(request, response);
-		}else {
-			
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

@@ -40,4 +40,8 @@ public class ShareDAO {
 //	public Post postAndReplies(SqlSession session, String code) {
 //		return session.selectOne("share.postAndReplies",code);
 //	}
+	
+	public int deleteReply(SqlSession session, String code) {
+		return session.delete("share.deleteReply",code);
+	}
 }

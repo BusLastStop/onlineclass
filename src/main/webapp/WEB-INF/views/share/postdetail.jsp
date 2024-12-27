@@ -121,7 +121,10 @@
 							<c:if test="${not empty sessionScope.user}">
 								<c:if test="${user.userType eq '학생'}">
 									<c:if test="${user.userinfo.stuCode eq reply.stuCode}">
-										<td class="comment-delete"><button>삭제</button></td>
+										<td class="comment-delete">
+											<button onclick="confirm('정말 삭제하시겠습니까?')?
+													location.assign('${path}/share/deletereply.do?posRepCode=${reply.posRepCode}&posCode=${post.posCode}'):'';">삭제</button>
+										</td>
 									</c:if>
 									<c:if test="${user.userinfo.stuCode ne reply.stuCode}">
 										<td></td>
@@ -129,14 +132,21 @@
 								</c:if>
 								<c:if test="${user.userType eq '강사'}">
 									<c:if test="${user.userinfo.teaCode eq reply.teaCode}">
-										<td class="comment-delete"><button>삭제</button></td>
+										<td class="comment-delete">
+											<button onclick="confirm('정말 삭제하시겠습니까?')?
+													location.assign('${path}/share/deletereply.do?posRepCode=${reply.posRepCode}&posCode=${post.posCode}'):'';">삭제</button>
+										</td>
 									</c:if>
 									<c:if test="${user.userinfo.teaCode ne reply.teaCode}">
 										<td></td>
 									</c:if>
 								</c:if>
 								<c:if test="${reply.posRepLevel==1}">
-									<td class="comment-reply"><button onclick="$('#comment${reply.posRepCode}').css('display','');">답글</button></td>
+									<td class="comment-reply">
+										<button onclick="$('#comment${reply.posRepCode}').css('display')=='none'?
+														$('#comment${reply.posRepCode}').css('display',''):
+														$('#comment${reply.posRepCode}').css('display','none');">답글</button>
+									</td>
 								</c:if>
 								<c:if test="${reply.posRepLevel!=1}">
 									<td></td>

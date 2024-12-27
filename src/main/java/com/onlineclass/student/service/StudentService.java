@@ -2,10 +2,12 @@ package com.onlineclass.student.service;
 
 import static com.onlineclass.common.SqlSessionTemplate.getSession;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.onlineclass.share.dto.Post;
 import com.onlineclass.student.dao.StudentDAO;
 import com.onlineclass.student.dto.Student;
 
@@ -43,5 +45,12 @@ public class StudentService {
 		Student student = dao.studentLogin(session, user);
 		session.close();
 		return student;
+	}
+	
+	public List<Post> getMyPosts(String code){
+		SqlSession session = getSession();
+		List<Post> posts = dao.getMyPosts(session, code);
+		session.close();
+		return posts;
 	}
 }

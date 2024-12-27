@@ -58,6 +58,7 @@
 			<h2 id="admin" style="background-color:#ffccbc">관리자</h2>
 		</div>
 		<h1>로그인!</h1>
+		<%-- <form id="login" class="point" action="${pageContext.request.contextPath}/member/login.do" method="get"> --%>
 		<form id="login" class="point" action="${pageContext.request.contextPath}/member/login.do" method="post">
 			<input type="hidden" id="userType" name="userType" value="학생">
 			<input type="text" id="userId" name="userId">
@@ -68,7 +69,7 @@
 		<div class="point">
 			<a href="#">아이디 찾기</a>
 			<a href="#">비밀번호 찾기</a>
-			<a href="#">회원가입</a>
+			<a href="${pageContext.request.contextPath}/member/enrollpage.do">회원가입</a>
 		</div>
 		<div class="point">
 			<img src="" alt="소셜 로그인 아이콘">

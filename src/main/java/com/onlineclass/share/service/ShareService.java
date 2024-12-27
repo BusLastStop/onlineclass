@@ -70,4 +70,12 @@ public class ShareService {
 //		session.close();
 //		return post;
 //	}
+	
+	public int deleteReply(String code) {
+		SqlSession session = getSession();
+		int result = dao.deleteReply(session, code);
+		if(result>0) session.commit();
+		else session.rollback();
+		return result;
+	}
 }

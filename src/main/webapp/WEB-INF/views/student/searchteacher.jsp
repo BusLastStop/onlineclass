@@ -5,17 +5,20 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <style>
 	section{
+		height:80vh;
+		min-height:500px;
 		display:flex;
 		flex-direction:column;
 		align-items:center;
+	}
+	#teacher-container{
 		width:80%;
-		height:70vh;
-		min-width:500px;
-		min-height:500px;
-		margin:auto;
+		height:100%;
 	}
 </style>
 <section>
-	<jsp:include page="/WEB-INF/views/common/mypageheader.jsp"/>
+	<jsp:include page="/WEB-INF/views/student/realtimelectureheader.jsp"/>
+	<div id="teacher-container">
+	</div>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -27,6 +27,7 @@
 		width:40%;
 		height:110vh;
 		min-width:500px;
+		min-height:1000px;
 		background-color:#fbe9e7;
 	}
 	#enroll{
@@ -71,7 +72,7 @@
 			<input type="date" name="birthDate" required>
 			<p>이메일</p>
 			<div style="display:flex;justify-content:center;align-items:center;">
-				<input type="text" name="email" required id="email" style="width:70%;">
+				<input type="text" name="email" required id="email" style="width:75%;">
 				<button type="button" id="emailCheck" style="width:80px;height:30px;margin-left:5px;background-color:#ffccbc">중복확인</button>
 				<input type="hidden" id="emailDup" value="false">
 			</div>
@@ -131,6 +132,9 @@
 				document.getElementById("pwResultText").innerText="비밀번호 일치!";
 				document.getElementById("pwCheckResult").value="true";
 			}
+		});
+		$("#pw").keypress(e=>{
+			document.getElementById("pwCheckResult").value="false";
 		});
 		$("#emailCheck").click(e=>{
 			const email = document.getElementById("email").value;

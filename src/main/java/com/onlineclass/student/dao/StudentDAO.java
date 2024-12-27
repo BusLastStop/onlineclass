@@ -1,9 +1,11 @@
 package com.onlineclass.student.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.onlineclass.share.dto.Post;
 import com.onlineclass.student.dto.Student;
 
 public class StudentDAO {
@@ -21,5 +23,9 @@ public class StudentDAO {
 	
 	public Student studentLogin(SqlSession session, Map<String,String> user) {
 		return session.selectOne("student.studentLogin",user);
+	}
+	
+	public List<Post> getMyPosts(SqlSession session, String code){
+		return session.selectList("student.getMyPosts",code);
 	}
 }

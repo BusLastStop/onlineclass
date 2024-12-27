@@ -1,8 +1,6 @@
-package com.onlineclass.student.controller;
+package com.onlineclass.share.controller;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.onlineclass.share.dto.Post;
-import com.onlineclass.student.dto.Student;
-import com.onlineclass.student.service.StudentService;
+import com.onlineclass.share.service.ShareService;
 
 /**
- * Servlet implementation class MyPostServlet
+ * Servlet implementation class DeleteReplyServlet
  */
-@WebServlet("/student/mypost.do")
-public class MyPostServlet extends HttpServlet {
+@WebServlet("/share/deletereply.do")
+public class DeleteReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPostServlet() {
+    public DeleteReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,11 +29,20 @@ public class MyPostServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, Object> user = (Map<String,Object>)request.getSession().getAttribute("user");
-		String code = ((Student)user.get("userinfo")).getStuCode();
-		List<Post> posts = new StudentService().getMyPosts(code);
-		request.setAttribute("posts", posts);
-		request.getRequestDispatcher("/WEB-INF/views/student/mypost.jsp").forward(request, response);
+		String repCode = request.getParameter("posRepCode");
+		String posCode = request.getParameter("posCode");
+		int result = new ShareService().deleteReply(repCode);
+		String msg, loc;
+		if(result>0) {
+			msg = "댓글을 삭제하였습니다!";
+			loc = "/share/postdetail.do?posCode="+posCode;
+		}else {
+			msg = "댓글 삭제에 실패하였습니다!";
+			loc = "/share/postdetail.do?posCode="+posCode;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

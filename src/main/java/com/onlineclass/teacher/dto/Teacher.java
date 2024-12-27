@@ -25,8 +25,8 @@ public class Teacher {
 	private String teaSubject;
 	private int teaTotalAccumIncome;
 	private int teaLectureAccumIncome;
-	private int teaTutAccumIncome;
-	private int teaTutAccumMatchTime;
+	private int teaTutuorialAccumIncome;
+	private int teaTutuorialAccumMatchTime;
 	private int teaTutAccumMatchCount;
 	private int teaTutIdenticalMatchCount;
 }
