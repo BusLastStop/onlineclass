@@ -67,8 +67,8 @@
 			<input type="submit" value="로그인" style="background-color:#ffccbc">
 		</form>
 		<div class="point">
-			<a href="#">아이디 찾기</a>
-			<a href="#">비밀번호 찾기</a>
+			<a href="${pageContext.request.contextPath}/member/findid.do">아이디 찾기</a>
+			<a href="${pageContext.request.contextPath}/member/findpw.do">비밀번호 찾기</a>
 			<a href="${pageContext.request.contextPath}/member/enrollpage.do">회원가입</a>
 		</div>
 		<div class="point">

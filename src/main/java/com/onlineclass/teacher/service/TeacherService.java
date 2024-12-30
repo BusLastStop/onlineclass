@@ -43,4 +43,43 @@ public class TeacherService {
 		session.close();
 		return teacher;
 	}
+	
+	public String sendIdEmail(Map<String,String> info) {
+		SqlSession session = getSession();
+		String id = dao.sendIdEmail(session, info);
+		session.close();
+		return id;
+	}
+	
+	public String sendIdPhone(Map<String,String> info) {
+		SqlSession session = getSession();
+		String id = dao.sendIdPhone(session, info);
+		session.close();
+		return id;
+	}
+	
+	public int findTeacherEmail(Map<String,String> info) {
+		SqlSession session = getSession();
+		int count = dao.findTeacherEmail(session, info);
+		session.close();
+		return count;
+	}
+	
+	public int findTeacherPhone(Map<String,String> info) {
+		SqlSession session = getSession();
+		int count = dao.findTeacherPhone(session, info);
+		session.close();
+		return count;
+	}
+	
+	public int teacherTempPw(Map<String, String> info) {
+		SqlSession session = getSession();
+		int result = dao.teacherTempPw(session, info);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		session.close();
+		
+		return result;
+	}
 }

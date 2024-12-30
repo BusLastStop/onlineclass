@@ -17,7 +17,7 @@ import com.onlineclass.common.PasswordEncoding;
 /**
  * Servlet Filter implementation class PasswordEncryptFilter
  */
-@WebFilter({"/member/enrollend.do", "/member/login.do"})
+@WebFilter({"/member/enrollend.do", "/member/login.do","/student/temppw.do","/teacher/temppw.do"})
 public class PasswordEncryptFilter extends HttpFilter implements Filter {
        
     /**

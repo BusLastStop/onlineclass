@@ -28,4 +28,24 @@ public class StudentDAO {
 	public List<Post> getMyPosts(SqlSession session, String code){
 		return session.selectList("student.getMyPosts",code);
 	}
+	
+	public String sendIdEmail(SqlSession session, Map<String,String> info) {
+		return session.selectOne("student.sendIdEmail",info);
+	}
+	
+	public String sendIdPhone(SqlSession session, Map<String,String> info) {
+		return session.selectOne("student.sendIdPhone",info);
+	}
+	
+	public int findStudentEmail(SqlSession session, Map<String,String> info) {
+		return session.selectOne("student.findStudentEmail",info);
+	}
+	
+	public int findStudentPhone(SqlSession session, Map<String,String> info) {
+		return session.selectOne("student.findStudentPhone",info);
+	}
+	
+	public int studentTempPw(SqlSession session, Map<String, String> info) {
+		return session.update("student.studentTempPw",info);
+	}
 }

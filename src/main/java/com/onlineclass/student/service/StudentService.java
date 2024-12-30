@@ -53,4 +53,43 @@ public class StudentService {
 		session.close();
 		return posts;
 	}
+	
+	public String sendIdEmail(Map<String,String> info) {
+		SqlSession session = getSession();
+		String id = dao.sendIdEmail(session, info);
+		session.close();
+		return id;
+	}
+	
+	public String sendIdPhone(Map<String,String> info) {
+		SqlSession session = getSession();
+		String id = dao.sendIdPhone(session, info);
+		session.close();
+		return id;
+	}
+	
+	public int findStudentEmail(Map<String,String> info) {
+		SqlSession session = getSession();
+		int count = dao.findStudentEmail(session, info);
+		session.close();
+		return count;
+	}
+	
+	public int findStudentPhone(Map<String,String> info) {
+		SqlSession session = getSession();
+		int count = dao.findStudentPhone(session, info);
+		session.close();
+		return count;
+	}
+	
+	public int studentTempPw(Map<String, String> info) {
+		SqlSession session = getSession();
+		int result = dao.studentTempPw(session, info);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		session.close();
+		
+		return result;
+	}
 }

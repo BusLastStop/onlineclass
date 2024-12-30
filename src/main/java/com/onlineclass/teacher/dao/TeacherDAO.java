@@ -22,4 +22,24 @@ public class TeacherDAO {
 	public Teacher teacherLogin(SqlSession session, Map<String,String> user) {
 		return session.selectOne("teacher.teacherLogin",user);
 	}
+	
+	public String sendIdEmail(SqlSession session, Map<String,String> info) {
+		return session.selectOne("teacher.sendIdEmail",info);
+	}
+	
+	public String sendIdPhone(SqlSession session, Map<String,String> info) {
+		return session.selectOne("teacher.sendIdPhone",info);
+	}
+	
+	public int findTeacherEmail(SqlSession session, Map<String,String> info) {
+		return session.selectOne("teacher.findTeacherEmail",info);
+	}
+	
+	public int findTeacherPhone(SqlSession session, Map<String,String> info) {
+		return session.selectOne("teacher.findTeacherPhone",info);
+	}
+	
+	public int teacherTempPw(SqlSession session, Map<String, String> info) {
+		return session.update("teacher.teacherTempPw",info);
+	}
 }
