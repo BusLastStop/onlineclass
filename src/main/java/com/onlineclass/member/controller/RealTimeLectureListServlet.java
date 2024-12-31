@@ -37,7 +37,7 @@ public class RealTimeLectureListServlet extends HttpServlet {
 			}
 		}catch(NullPointerException e){
 			String msg,loc;
-			msg = "권한이 없습니다 😡";
+			msg = "로그인 후 이용해 주세요!";
 			loc = "/";
 			request.setAttribute("msg",msg);
 			request.setAttribute("loc", loc);

@@ -11,14 +11,14 @@
 	div#search a{ width:60px;height:30px;text-align:center;border:1px solid #ffccbc;border-radius:3px;background-color:#fbe9e7; }
 	div#search input{ width:80%;height:25px;margin:0 10px 0 10px;border:1px solid #ffccbc;border-radius:3px; }
 	div#search button{ width:60px;height:30px;border:1px solid #ffccbc;border-radius:3px;background-color:#fbe9e7; }
-	div#filter{ position:absolute;display:none;justify-content:center;align-items:center;width:30%;padding:15px;margin-top:10px;background-color:#fbe9e7;z-index:15; }
+	div#filter{ position:absolute;display:none;justify-content:center;align-items:center;width:30%;min-width:400px;padding:15px;margin-top:10px;background-color:#fbe9e7;z-index:15; }
 	div#filter>div.filter-container{ background-color:white;margin:5px; }
 	.filter-container *{ margin:3px; }
-	.subject{ width:130px;height:130px;border:1px solid #ffccbc;display:flex;flex-direction:column;justify-content:center;align-items:center; }
+	.subject{ min-width:160px;height:130px;border:1px solid #ffccbc;display:flex;flex-direction:column;justify-content:center;align-items:center; }
 	.subject label{ margin:0; }
 	.time{ width:140px;height:130px;border:1px solid #ffccbc;display:flex;flex-direction:column;justify-content:center;align-items:center; }
 	.time div{ margin:0; }
-	.searchName{ width:190px;height:130px;border:1px solid #ffccbc;display:flex;flex-direction:column;justify-content:center;align-items:center; }
+	.searchName{ min-width:100px;height:130px;border:1px solid #ffccbc;display:flex;flex-direction:column;justify-content:center;align-items:center; }
 	.searchName input{ width:85%;padding:0 0 0 3px;margin:0; }
 	div#filter h4{ margin:5px;text-align:center;background-color:#ffccbc;width:90%;height:24px; }
 	div#filter p{ margin:0;text-align:center; }

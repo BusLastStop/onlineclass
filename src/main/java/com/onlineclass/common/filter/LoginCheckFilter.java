@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter({ "/member/mylecturelist.do"/* ,"/member/mypage.do","/student/mypost.do","/teacher/myreply.do" */})
+@WebFilter({ "/member/mylecturelist.do","/member/mypage.do","/student/mypost.do","/teacher/myreply.do",
+	"/student/searchteacher.do","/student/sentrequest.do","/student/waitreservation.do", "/student/cancelreservation.do",
+	"/teacher/lectureslot.do", "/teacher/recievedrequestlist.do", "/teacher/changereservation.do", "/teacher/uploadlecturedata.do"})
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
     /**
