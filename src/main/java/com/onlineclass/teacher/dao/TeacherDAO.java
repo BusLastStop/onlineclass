@@ -42,4 +42,16 @@ public class TeacherDAO {
 	public int teacherTempPw(SqlSession session, Map<String, String> info) {
 		return session.update("teacher.teacherTempPw",info);
 	}
+	
+	public int lectureUpload(SqlSession session, Map<String,String> lecInfo) {
+		return session.insert("teacher.lectureUpload",lecInfo);
+	}
+	
+	public String getLecCode(SqlSession session, Map<String,String> lecInfo) {
+		return session.selectOne("teacher.getLecCode",lecInfo);
+	}
+	
+	public int lectureVideoRequest(SqlSession session, Map<String,String> vidInfo) {
+		return session.insert("teacher.lectureVideoRequest",vidInfo);
+	}
 }

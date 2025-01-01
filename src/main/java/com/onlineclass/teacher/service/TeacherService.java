@@ -82,4 +82,37 @@ public class TeacherService {
 		
 		return result;
 	}
+	
+	public int lectureUpload(Map<String,String> lecInfo) {
+		SqlSession session = getSession();
+		int result = dao.lectureUpload(session, lecInfo);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		
+		session.close();
+		
+		return result;
+	}
+	
+	public String getLecCode(Map<String,String> lecInfo) {
+		SqlSession session = getSession();
+		String lecCode = dao.getLecCode(session, lecInfo);
+		
+		session.close();
+		
+		return lecCode;
+	}
+	
+	public int lectureVideoRequest(Map<String,String> vidInfo) {
+		SqlSession session = getSession();
+		int result = dao.lectureVideoRequest(session, vidInfo);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		
+		session.close();
+		
+		return result;
+	}
 }
