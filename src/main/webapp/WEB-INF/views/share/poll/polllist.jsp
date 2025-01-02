@@ -22,10 +22,11 @@
 	div#boardList>h2{ display:inline-block;margin:10px 0 10px 10%; }
 	div#boardList>table{ margin:auto;width:90%; }
 	div#boardList>#board-category{ height:25px;margin:0 0 10px 10%; }
-	table .title{ width:auto;padding-left:5px; }
-	table .nickname{ width:10%;padding-left:5px;text-align:center; }
-	table .createDate{ width:10%;padding-left:5px;text-align:center; }
-	table .closed{ width:5%;text-align:center; }
+	table .polCode{ width:8%; padding-left:5px; text-aling:center; }
+	table .polTitle{ width:auto; padding-left:5px; text-align:center; }
+	table .polCreator{ width:10%; padding-left:5px; text-align:center; }
+	table .polCreatedDateTime{ width:12%; padding-left:5px; text-align:center; }
+	table .closedOrNot{ width:10%; text-align:center; }
 	#vote{
 		width:90%;
 		height:900px;
@@ -101,26 +102,26 @@
 					<c:if test="${not empty polls}">
 						<c:forEach var="p" items="${polls}">
 							<tr>
-								<td>
+								<td class="polCode">
 									${p.polCode}
 								</td>
-								<td>
+								<td class="polTitle">
 									<a href="${path}/share/poll/view}">
 										${p.polTitle}
 									</a>
 								</td>
-								<td>
+								<td class="polCreator">
 									${p.polCreator.stuName}
 								</td>
-								<td>
+								<td class="polCreatedDateTime">
 									<fmt:formatDate value="${p.polCreatedDateTime}" pattern="dd/MM/YYYY" />
 								</td>
-								<td>
+								<td class="closedOrNot">
 									<c:if test="${today.isAfter(p.polEndDateTime.toLocalDateTime())}">
-										"마감"
+										마감
 									</c:if>
 									<c:if test="${today.isBefore(p.polEndDateTime.toLocalDateTime())}">
-										"진행 중"
+										진행 중
 									</c:if> 
 								</td>
 							</tr>
