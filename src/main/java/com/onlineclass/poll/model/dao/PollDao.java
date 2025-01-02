@@ -1,5 +1,6 @@
 package com.onlineclass.poll.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,5 +19,9 @@ public class PollDao {
 	
 	public int savePollReminder(SqlSession session, Map<String,String> p) {
 		return session.insert("pollMapper.savePollReminder", p);
+	}
+	
+	public List<Poll> fetchPollList(SqlSession session) {
+		return session.selectList("pollMapper.fetchPollList");
 	}
 }

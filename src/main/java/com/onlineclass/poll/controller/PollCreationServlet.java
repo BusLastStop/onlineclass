@@ -27,7 +27,7 @@ public class PollCreationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/WEB-INF/views/poll/pollcreation.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/share/poll/pollcreation.jsp").forward(request, response);
 	}
 
 	/**
