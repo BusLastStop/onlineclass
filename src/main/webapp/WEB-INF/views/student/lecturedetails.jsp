@@ -124,7 +124,7 @@
 	</c:if>
 	<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">
 		<c:if test="${not empty sessionScope.user}">
-			<button id="registLectureBottom" onclick="confirm('수강신청 하시겠습니까?')?location.assign('${pageContext.request.contextPath}/student/registlecture.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}'):'';">수강신청</button>
+			<button id="registLectureBottom" onclick="confirm('수강신청 하시겠습니까?')?registLecture():'';">수강신청</button>
 			<button id="cancelRegistBottom" onclick="confirm('수강신청을 취소하시겠습니까?')?location.assign('${pageContext.request.contextPath}/student/cancleregist.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}'):''" style="display:none;">수강취소</button>
 		</c:if>
 		<button onclick="window.close();">나가기</button>
@@ -153,6 +153,34 @@
 				}
 			});
 		};
+		
+		const registLecture=()=>{
+			IMP.init("imp02587333");
+			IMP.request_pay(
+				{
+					channelKey:"channel-key-a181aea8-d36b-4be3-8985-2cc2d0a01afb",
+					pay_method:"card",
+					merchant_uid:`payment-${Math.floor(Math.random()*1000000000)}`,
+					name:"테스트 결제",
+					amount:1,
+					buyer_email: "gildong@gmail.com",
+				    buyer_name: "홍길동",
+				    buyer_tel: "010-4242-4242",
+				    buyer_addr: "서울특별시 강남구 신사동",
+				    buyer_postcode: "01181",
+				},
+				async (response) => {
+					if (response.error_code != null) {
+					    console.log(response.error_code);
+					    return alert("결제에 실패하였습니다. 에러 내용: "+response.error_msg);
+				    }
+					if(response.success){
+						location.assign("${pageContext.request.contextPath}/student/registlecture.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}");
+					}
+				};
+			);
+			
+		}
 		
 		$.post("${pageContext.request.contextPath}/student/checkinterestedlecture.do",{stuCode:${user.userinfo.stuCode},lecCode:${lecture.lecCode}},data=>{
 			if(data!=""){

@@ -34,16 +34,15 @@ public class RegistLectureServlet extends HttpServlet {
 		String stuCode = request.getParameter("stuCode");
 		Map<String, String> code = Map.of("lecCode",lecCode,"stuCode",stuCode);
 		// 작동 확인. 결제 API 추가 후 사용하기
-		// int result = new StudentService().registLecture(code);
-		int result = 0;	// 결제 API 추가 전이라 수강신청 실패로 해놓음
+		int result = new StudentService().registLecture(code);
 		if(result>0) {
 			String msg;
-			msg = "수강신청 완료되었습니다";
+			msg = "수강신청이 완료되었습니다";
 			request.setAttribute("msg", msg);
 			request.getRequestDispatcher("/WEB-INF/views/common/winclose.jsp").forward(request, response);
 		}else {
 			String msg, loc;
-			msg = "수강신청 실패(결제 API 추가하기)!";
+			msg = "수강신청 중 오류가 발생하였습니다!";
 			loc = "/student/lecturedetails.do?lecCode="+lecCode;
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
