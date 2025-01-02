@@ -38,6 +38,8 @@
 	.contents img{ width:60%;min-width:100px;max-height:180px;min-height:70px; }
 	.contents h4{ margin:5px 0 5px 0; }
 	.contents p{ margin:0; }
+	.pagination{ display:flex;justify-content:center;align-items:center;height:25px; }
+	.page-item{ display:inline-block; }
 </style>
 <section>
 	<form id="searchForm" action="" method="get">
@@ -120,82 +122,23 @@
 			<h1>녹화강의 목록</h1>
 		</div>
 		<div id="recordList">
-			<div class="contents" onclick="window.open('${path}/student/lecturedetails.do','_blank','width=1000,height=800');">
-				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
-				<h4>녹화강의</h4>
-				<div style="display:flex;">
-					<p>강사명</p>
-					<p>|</p>
-					<p>날짜</p>
-				</div>
-			</div>
-			<div class="contents">
-				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
-				<h4>녹화강의</h4>
-				<div style="display:flex;">
-					<p>강사명</p>
-					<p>|</p>
-					<p>날짜</p>
-				</div>
-			</div>
-			<div class="contents">
-				<img src="${pageContext.request.contextPath}/resources/images/class1.jpeg" alt="강의사진">
-				<h4>녹화강의</h4>
-				<div style="display:flex;">
-					<p>강사명</p>
-					<p>|</p>
-					<p>날짜</p>
-				</div>
-			</div>
-			<div class="contents">
-				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
-				<h4>녹화강의</h4>
-				<div style="display:flex;">
-					<p>강사명</p>
-					<p>|</p>
-					<p>날짜</p>
-				</div>
-			</div>
-			<div class="contents">
-				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
-				<h4>녹화강의</h4>
-				<div style="display:flex;">
-					<p>강사명</p>
-					<p>|</p>
-					<p>날짜</p>
-				</div>
-			</div>
-			<div class="contents">
-				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
-				<h4>녹화강의</h4>
-				<div style="display:flex;">
-					<p>강사명</p>
-					<p>|</p>
-					<p>날짜</p>
-				</div>
-			</div>
-			<div class="contents">
-				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
-				<h4>녹화강의</h4>
-				<div style="display:flex;">
-					<p>강사명</p>
-					<p>|</p>
-					<p>날짜</p>
-				</div>
-			</div>
-			<div class="contents">
-				<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
-				<h4>녹화강의</h4>
-				<div style="display:flex;">
-					<p>강사명</p>
-					<p>|</p>
-					<p>날짜</p>
-				</div>
-			</div>
+			<c:if test="${not empty lectures}">
+				<c:forEach var="lecture" items="${lectures}">
+					<div class="contents" onclick="window.open('${path}/student/lecturedetails.do?lecCode=${lecture.lecCode}','_blank','width=1000,height=1000')">
+						<img src="" alt="강의사진">
+						<h4>${lecture.lecName}</h4>
+						<div style="display:flex;">
+							<p>${lecture.teacher.teaName}</p>
+							<p>|</p>
+							<p>${lecture.video.vidDateTime}</p>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>
 		</div>
 	</div>
 	<div>
-		<p style="text-align:center;border:1px solid #ffccbc;margin:0;">페이지네이션</p>
+		<p style="text-align:center;border:1px solid #ffccbc;margin:0;">${pageBar}</p>
 	</div>
 	<script>
 		const openFilter=()=>{

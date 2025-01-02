@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.onlineclass.teacher.service.TeacherService;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class LectureUploadEndServlet
@@ -30,12 +32,23 @@ public class LectureUploadEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String subject = request.getParameter("subject");
-		String uploadLecture = request.getParameter("uploadLecture");
-		String lectureTime = request.getParameter("lectureTime");
-		String lectureTitle = request.getParameter("lectureTitle");
-		String teacherCode = request.getParameter("teacherCode");
-		String keyword = request.getParameter("keyword");
+		String path = getServletContext().getRealPath("/resources/upload/record");
+		MultipartRequest mr = new MultipartRequest(
+				request,
+				path,
+				1024*1024*1024,
+				"utf-8",
+				new DefaultFileRenamePolicy()
+				);
+		
+		String subject = mr.getParameter("subject");
+		String lectureTime = mr.getParameter("lectureTime");
+		String lectureTitle = mr.getParameter("lectureTitle");
+		String teacherCode = mr.getParameter("teacherCode");
+		String keyword = mr.getParameter("keyword");
+		
+		String oriFileName = mr.getOriginalFileName("uploadLecture");
+		String renamedFileName = mr.getFilesystemName("uploadLecture");
 		
 		Map<String,String> lecInfo =
 				Map.of("subject",subject,"title",lectureTitle,"time",lectureTime,
@@ -43,7 +56,7 @@ public class LectureUploadEndServlet extends HttpServlet {
 		int result = new TeacherService().lectureUpload(lecInfo);
 		if(result>0) {
 			String lecCode = new TeacherService().getLecCode(lecInfo);
-			Map<String,String> vidInfo = Map.of("fileName",uploadLecture,"lecCode",lecCode,"teaCode",teacherCode);
+			Map<String,String> vidInfo = Map.of("fileName",renamedFileName,"lecCode",lecCode,"teaCode",teacherCode);
 			int result2 = new TeacherService().lectureVideoRequest(vidInfo);
 			if(result2>0) {
 				String msg = "업로드 요청 완료!";

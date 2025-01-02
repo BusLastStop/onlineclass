@@ -41,10 +41,12 @@ public class PostServlet extends HttpServlet {
 		try {
 			numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
 		}catch(NumberFormatException e) {
-			numPerPage = 10;
+			numPerPage = 8;
 		}
+		
 		Map<String, Integer> page = Map.of("cPage",cPage,"numPerPage",numPerPage);
 		List<Post> postList = new ShareService().selectPostList(page);
+		
 		int totalCount = new ShareService().postCount();
 		int totalPage = totalCount/numPerPage+1;
 		int pageBarSize = 5;

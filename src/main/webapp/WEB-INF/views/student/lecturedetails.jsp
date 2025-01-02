@@ -74,7 +74,7 @@
 </style>
 </head>
 <body>
-	<h1>강의 제목</h1>
+	<h1>${lecture.lecName}</h1>
 	<div style="text-align:center;border:0;">
 		<img src="${pageContext.request.contextPath}/resources/images/community.png" alt="강의 사진">
 	</div>
@@ -107,7 +107,7 @@
 	<c:if test="${not empty sessionScope.user}">
 		<div>
 			<h4>강의후기</h4>
-			<table>
+			<!-- <table>
 				<tr>
 					<td>닉네임닉네임</td>
 					<td>후기</td>
@@ -123,7 +123,18 @@
 					<td>후기</td>
 					<td>날짜</td>
 				</tr>
-			</table>
+			</table> -->
+			<c:if test="${not empty lecture.review}">
+				<table>
+					<c:forEach var="review" items="${lecture.review}">
+						<tr>
+							<td>${review.student.stuName}</td>
+							<td>${review.revComment}</td>
+							<td>${review.revDateTime}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
 		</div>
 	</c:if>
 	<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">

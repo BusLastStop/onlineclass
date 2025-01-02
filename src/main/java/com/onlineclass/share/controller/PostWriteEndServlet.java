@@ -34,7 +34,7 @@ public class PostWriteEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = getServletContext().getRealPath("/resources/upload/post");
-		System.out.println(path);
+//		System.out.println(path);
 		MultipartRequest mr = new MultipartRequest(
 				request,
 				path,

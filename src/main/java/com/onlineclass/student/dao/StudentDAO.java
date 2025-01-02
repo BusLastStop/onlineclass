@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.onlineclass.member.dto.Lecture;
 import com.onlineclass.share.dto.Post;
 import com.onlineclass.student.dto.Student;
 
@@ -47,5 +48,17 @@ public class StudentDAO {
 	
 	public int studentTempPw(SqlSession session, Map<String, String> info) {
 		return session.update("student.studentTempPw",info);
+	}
+	
+	public List<Lecture> recordLectures(SqlSession session){
+		return session.selectList("student.recordLectures");
+	}
+	
+	public int lectureCount(SqlSession session) {
+		return session.selectOne("student.lectureCount");
+	}
+	
+	public Lecture lectureDetails(SqlSession session, String lecCode) {
+		return session.selectOne("student.lectureDetails",lecCode);
 	}
 }

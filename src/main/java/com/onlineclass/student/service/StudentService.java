@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.onlineclass.member.dto.Lecture;
 import com.onlineclass.share.dto.Post;
 import com.onlineclass.student.dao.StudentDAO;
 import com.onlineclass.student.dto.Student;
@@ -91,5 +92,32 @@ public class StudentService {
 		session.close();
 		
 		return result;
+	}
+	
+	public List<Lecture> recordLectures(){
+		SqlSession session = getSession();
+		List<Lecture> lectures = dao.recordLectures(session);
+		
+		session.close();
+		
+		return lectures;
+	}
+	
+	public int lectureCount() {
+		SqlSession session = getSession();
+		int count = dao.lectureCount(session);
+		
+		session.close();
+		
+		return count;
+	}
+	
+	public Lecture lectureDetails(String lecCode) {
+		SqlSession session = getSession();
+		Lecture lecture = dao.lectureDetails(session, lecCode);
+		
+		session.close();
+		
+		return lecture;
 	}
 }

@@ -47,7 +47,7 @@
 <body>
 	<div id="lecture-container">
 		<h1>강의 업로드 요청</h1>
-		<form action="${path}/teacher/lectureuploadend.do" method="post" onsubmit="return uploadResult();">
+		<form action="${path}/teacher/lectureuploadend.do" method="post" enctype="multipart/form-data" onsubmit="return uploadResult();">
 			<table>
 				<tr>
 					<td>과목</td>
@@ -117,10 +117,13 @@
 					if(hours>0){
 						if(hours>=10) document.getElementById("lectureTime").value=hours+":";
 						else document.getElementById("lectureTime").value="0"+hours+":";
+						
+						if(minutes>=10) document.getElementById("lectureTime").value+=minutes+":";
+						else document.getElementById("lectureTime").value+="0"+minutes+":";
+					}else{
+						if(minutes>=10) document.getElementById("lectureTime").value=minutes+":";
+						else document.getElementById("lectureTime").value="0"+minutes+":";
 					}
-					if(minutes>=10) document.getElementById("lectureTime").value+=minutes+":";
-					else document.getElementById("lectureTime").value+="0"+minutes+":";
-					
 					if(seconds>=10) document.getElementById("lectureTime").value+=seconds;
 					else document.getElementById("lectureTime").value+="0"+seconds;
 					
