@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @WebFilter(urlPatterns = { "/member/mylecturelist.do","/member/mypage.do","/student/mypost.do","/teacher/myreply.do",
 	"/student/searchteacher.do","/student/sentrequest.do","/student/waitreservation.do", "/student/cancelreservation.do",
 	"/teacher/lectureslot.do", "/teacher/recievedrequestlist.do", "/teacher/changereservation.do", "/teacher/uploadlecturedata.do"},
-servletNames = {"saveNewPoll"})
+	servletNames = {"saveNewPoll"})
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
     /**
