@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import com.onlineclass.member.dto.Lecture;
 import com.onlineclass.share.dto.Post;
 import com.onlineclass.student.dao.StudentDAO;
+import com.onlineclass.student.dto.Enrollment;
+import com.onlineclass.student.dto.FavouriteTeacher;
+import com.onlineclass.student.dto.InterestedLecture;
 import com.onlineclass.student.dto.Student;
 
 public class StudentService {
@@ -119,5 +122,98 @@ public class StudentService {
 		session.close();
 		
 		return lecture;
+	}
+	
+	public InterestedLecture getInterestedLecture(Map<String, String> code) {
+		SqlSession session = getSession();
+		InterestedLecture lecture = dao.getInterestedLecture(session,code);
+		
+		session.close();
+		
+		return lecture;
+	}
+	
+	public int addInterestedLecture(Map<String, String> code) {
+		SqlSession session = getSession();
+		int result = dao.addInterestedLecture(session, code);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		
+		session.close();
+		return result;
+	}
+	
+	public int removeInterestedLecture(Map<String, String> code) {
+		SqlSession session = getSession();
+		int result = dao.removeInterestedLecture(session, code);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		
+		session.close();
+		return result;
+	}
+	
+	public FavouriteTeacher getInterestedTeacher(Map<String, String> code) {
+		SqlSession session = getSession();
+		FavouriteTeacher teacher = dao.getInterestedTeacher(session,code);
+		
+		session.close();
+		
+		return teacher;
+	}
+	
+	public int addInterestedTeacher(Map<String, String> code) {
+		SqlSession session = getSession();
+		int result = dao.addInterestedTeacher(session, code);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		
+		session.close();
+		return result;
+	}
+	
+	public int removeInterestedTeacher(Map<String, String> code) {
+		SqlSession session = getSession();
+		int result = dao.removeInterestedTeacher(session, code);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		
+		session.close();
+		return result;
+	}
+	
+	public int registLecture(Map<String,String> code) {
+		SqlSession session = getSession();
+		int result = dao.registLecture(session, code);
+		
+		if(result>0) session.commit();
+		session.rollback();
+		
+		session.close();
+		
+		return result;
+	}
+	
+	public Enrollment getEnrollment(Map<String,String> code) {
+		SqlSession session = getSession();
+		Enrollment enrollment = dao.getEnrollment(session, code);
+		
+		session.close();
+		
+		return enrollment;
+	}
+	
+	public int cancelRegist(Map<String,String> code) {
+		SqlSession session = getSession();
+		int result = dao.cancelRegist(session,code);
+		
+		if(result>0) session.commit();
+		else session.rollback();
+		
+		return result;
 	}
 }

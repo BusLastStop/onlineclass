@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="icon" href="${path}/resources/images/red.png" type="image/x-icon"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <title>강의 상세 페이지</title>
 <style>
 	*{
@@ -80,9 +81,10 @@
 	</div>
 	<c:if test="${not empty sessionScope.user}">
 		<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">
-			<button>수강신청</button>
-			<button>관심강의</button>
-			<button>관심강사</button>
+			<button id="registLecture" onclick="confirm('수강신청 하시겠습니까?')?location.assign('${pageContext.request.contextPath}/student/registlecture.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}'):'';">수강신청</button>
+			<button id="cancelRegist" onclick="confirm('수강신청을 취소하시겠습니까?')?location.assign('${pageContext.request.contextPath}/student/cancleregist.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}'):''" style="display:none;">수강취소</button>
+			<button id="interestedLecture" onclick="interestedLecture();">관심강의</button>
+			<button id="interestedTeacher" onclick="interestedTeacher();">관심강사</button>
 			<button>수업계획서</button>
 		</div>
 	</c:if>
@@ -107,23 +109,6 @@
 	<c:if test="${not empty sessionScope.user}">
 		<div>
 			<h4>강의후기</h4>
-			<!-- <table>
-				<tr>
-					<td>닉네임닉네임</td>
-					<td>후기</td>
-					<td>2024-12-20</td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td>후기</td>
-					<td>날짜</td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td>후기</td>
-					<td>날짜</td>
-				</tr>
-			</table> -->
 			<c:if test="${not empty lecture.review}">
 				<table>
 					<c:forEach var="review" items="${lecture.review}">
@@ -139,9 +124,67 @@
 	</c:if>
 	<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">
 		<c:if test="${not empty sessionScope.user}">
-			<button>수강신청</button>
+			<button id="registLectureBottom" onclick="confirm('수강신청 하시겠습니까?')?location.assign('${pageContext.request.contextPath}/student/registlecture.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}'):'';">수강신청</button>
+			<button id="cancelRegistBottom" onclick="confirm('수강신청을 취소하시겠습니까?')?location.assign('${pageContext.request.contextPath}/student/cancleregist.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}'):''" style="display:none;">수강취소</button>
 		</c:if>
 		<button onclick="window.close();">나가기</button>
 	</div>
+	<script>
+		const interestedLecture=()=>{
+			$.post("${pageContext.request.contextPath}/student/interestedlecture.do",{stuCode:${user.userinfo.stuCode},lecCode:${lecture.lecCode}},data=>{
+				if(data!=""){
+					const color = data.split(",");
+					document.getElementById("interestedLecture").style.backgroundColor=color[0];
+					document.getElementById("interestedLecture").style.borderColor=color[1];
+				}else{
+					alert("오류!");
+				}
+			});
+		};
+		
+		const interestedTeacher=()=>{
+			$.post("${pageContext.request.contextPath}/student/interestedteacher.do",{stuCode:${user.userinfo.stuCode},teaCode:${lecture.teacher.teaCode}},data=>{
+				if(data!=""){
+					const color = data.split(",");
+					document.getElementById("interestedTeacher").style.backgroundColor=color[0];
+					document.getElementById("interestedTeacher").style.borderColor=color[1];
+				}else{
+					alert("오류!");
+				}
+			});
+		};
+		
+		$.post("${pageContext.request.contextPath}/student/checkinterestedlecture.do",{stuCode:${user.userinfo.stuCode},lecCode:${lecture.lecCode}},data=>{
+			if(data!=""){
+				const color = data.split(",");
+				document.getElementById("interestedLecture").style.backgroundColor=color[0];
+				document.getElementById("interestedLecture").style.borderColor=color[1];
+			}else{
+				alert("오류!");
+			}
+		});
+		
+		$.post("${pageContext.request.contextPath}/student/checkinterestedteacher.do",{stuCode:${user.userinfo.stuCode},teaCode:${lecture.teacher.teaCode}},data=>{
+			if(data!=""){
+				const color = data.split(",");
+				document.getElementById("interestedTeacher").style.backgroundColor=color[0];
+				document.getElementById("interestedTeacher").style.borderColor=color[1];
+			}else{
+				alert("오류!");
+			}
+		});
+		
+		$.post("${pageContext.request.contextPath}/student/checkregistlecture.do",{stuCode:${user.userinfo.stuCode},lecCode:${lecture.lecCode}},data=>{
+			if(data!=""){
+				const display = data.split(",");
+				document.getElementById("registLecture").style.display=display[0];
+				document.getElementById("registLectureBottom").style.display=display[0];
+				document.getElementById("cancelRegist").style.display=display[1];
+				document.getElementById("cancelRegistBottom").style.display=display[1];
+			}else{
+				alert("오류!");
+			}
+		});
+	</script>
 </body>
 </html>

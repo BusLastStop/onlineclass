@@ -7,6 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.onlineclass.member.dto.Lecture;
 import com.onlineclass.share.dto.Post;
+import com.onlineclass.student.dto.Enrollment;
+import com.onlineclass.student.dto.FavouriteTeacher;
+import com.onlineclass.student.dto.InterestedLecture;
 import com.onlineclass.student.dto.Student;
 
 public class StudentDAO {
@@ -60,5 +63,41 @@ public class StudentDAO {
 	
 	public Lecture lectureDetails(SqlSession session, String lecCode) {
 		return session.selectOne("student.lectureDetails",lecCode);
+	}
+	
+	public InterestedLecture getInterestedLecture(SqlSession session, Map<String, String> code) {
+		return session.selectOne("student.getInterestedLecture",code);
+	}
+	
+	public int addInterestedLecture(SqlSession session, Map<String, String> code) {
+		return session.insert("student.addInterestedLecture",code);
+	}
+	
+	public int removeInterestedLecture(SqlSession session, Map<String, String> code) {
+		return session.delete("student.removeInterestedLecture",code);
+	}
+	
+	public FavouriteTeacher getInterestedTeacher(SqlSession session, Map<String, String> code) {
+		return session.selectOne("student.getInterestedTeacher",code);
+	}
+	
+	public int addInterestedTeacher(SqlSession session, Map<String, String> code) {
+		return session.insert("student.addInterestedTeacher",code);
+	}
+	
+	public int removeInterestedTeacher(SqlSession session, Map<String, String> code) {
+		return session.delete("student.removeInterestedTeacher",code);
+	}
+	
+	public int registLecture(SqlSession session, Map<String,String> code) {
+		return session.insert("student.registLecture",code);
+	}
+	
+	public Enrollment getEnrollment(SqlSession session, Map<String,String> code) {
+		return session.selectOne("student.getEnrollment", code);
+	}
+	
+	public int cancelRegist(SqlSession session, Map<String,String> code) {
+		return session.delete("student.cancelRegist",code);
 	}
 }

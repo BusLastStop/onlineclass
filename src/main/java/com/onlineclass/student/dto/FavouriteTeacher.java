@@ -1,7 +1,7 @@
 package com.onlineclass.student.dto;
 
-public class InterestedTeacher {
-	private String intTeacherCode;
+public class FavouriteTeacher {
+	private String favCode;
 	private String teaCode;
 	private String stuCode;
 }

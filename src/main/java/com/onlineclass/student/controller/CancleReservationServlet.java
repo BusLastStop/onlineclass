@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CancelReservationServlet
  */
-@WebServlet("/student/cancelreservation.do")
-public class CancelReservationServlet extends HttpServlet {
+@WebServlet("/student/canclereservation.do")
+public class CancleReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CancelReservationServlet() {
+    public CancleReservationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
