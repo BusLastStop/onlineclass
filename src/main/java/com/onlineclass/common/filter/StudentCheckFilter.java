@@ -13,17 +13,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import com.onlineclass.student.dto.Student;
+
 /**
- * Servlet Filter implementation class LoginFilter
+ * Servlet Filter implementation class StudentCheckFilter
  */
-@WebFilter(urlPatterns = { "/member/mylecturelist.do"/* ,"/member/mypage.do","/student/mypost.do","/teacher/myreply.do" */},
-servletNames = {"saveNewPoll"})
-public class LoginCheckFilter extends HttpFilter implements Filter {
+@WebFilter(servletNames = {"saveNewPoll"})
+public class StudentCheckFilter extends HttpFilter implements Filter {
        
     /**
      * @see HttpFilter#HttpFilter()
      */
-    public LoginCheckFilter() {
+    public StudentCheckFilter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,18 +41,21 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		Map<String,Object> user = (Map<String,Object>)((HttpServletRequest)request).getSession().getAttribute("user");
-		if(user==null) {
+		// place your code here
+		
+		Map<String, Object> memberSignedIn=(Map<String, Object>)((HttpServletRequest)request).getSession().getAttribute("user");
+		if(memberSignedIn!=null&&!memberSignedIn.get("userType").equals("학생")) {
 			String msg, loc;
-			msg = "로그인 후 이용해 주세요!";
-			loc = "/";
+			msg = "학생만 이용 가능합니다.";
+			loc = "/member/loginpage.do";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		}
-
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
+		else {		
+			// pass the request along the filter chain
+			chain.doFilter(request, response);
+		}
 	}
 
 	/**

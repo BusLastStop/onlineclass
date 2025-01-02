@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <style>
 	section{
@@ -80,26 +83,54 @@
 			<div id="title">
 				<h2>투표</h2>
 			</div>
+			<div style="text-align:right;">
+				<button id="vote-generator" onclick="createNewPoll(event);"]>투표 생성</button>
+			</div>
 			<table>
-				<tr>
-					<td class="title"><a href="#">투표 확인 페이지 들어가기(링크 만들어야 함)</a></td>
-					<td class="nickname">작성자</td>
-					<td class="createDate">생성일</td>
-					<td class="closed">마감여부</td>
-				</tr>
-				<tr>
-					<td class="title">투표함 만들기(링크없음)</td>
-					<td class="nickname">작성자</td>
-					<td class="createDate">생성일</td>
-					<td class="closed">마감여부</td>
-				</tr>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>생성일</th>
+						<th>마감여부</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<c:if test="${not empty polls}">
+						<c:forEach var="p" items="${polls}">
+							<tr>
+								<td>
+									${p.polCode}
+								</td>
+								<td>
+									<a href="${path}/share/poll/view}">
+										${p.polTitle}
+									</a>
+								</td>
+								<td>
+									${p.polCreator.stuName}
+								</td>
+								<td>
+									<fmt:formatDate value="${p.polCreatedDateTime}" pattern="dd/MM/YYYY" />
+								</td>
+								<td>
+									<c:if test="${today.isAfter(p.polEndDateTime.toLocalDateTime())}">
+										"마감"
+									</c:if>
+									<c:if test="${today.isBefore(p.polEndDateTime.toLocalDateTime())}">
+										"진행 중"
+									</c:if> 
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</tbody>
 			</table>
 		</div>
-		<div style="text-align:right;">
-			<button id="vote-generator" onclick="createNewPoll(event);"]>투표 생성</button>
-		</div>
 		<div style="text-align:center;">
-			<p style="margin:5px 0 5px 0;">페이지네이션 공간</p>
+			<p style="margin:5px 0 5px 0;">페이지네이션이 필요할까?</p>
 		</div>
 	</div>
 </section>

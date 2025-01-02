@@ -6,121 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>투표 생성</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    
-    <style>
-    	body {
-    font-family: Arial, sans-serif;
-    color: #000000;
-    background-color: #FFFFFF;
-    margin: 0;
-    padding: 20px;
-    line-height: 1.6;
-}
-
-form {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #757575;
-    border-radius: 8px;
-    background-color: #FFFFFF;
-    text-align: center;
-}
-
-fieldset {
-    border: 1px solid #757575;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 15px;
-    text-align: left;
-}
-
-legend {
-    font-weight: bold;
-    color: #065986;
-}
-
-input[type="text"],
-input[type="datetime-local"],
-input[type="number"] {
-    width: calc(100% - 20px);
-    margin: 10px 0;
-    padding: 8px;
-    border: 1px solid #757575;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-label {
-    display: block;
-    margin: 5px 0;
-}
-
-input[type="radio"] {
-    margin-right: 8px;
-}
-
-/* 공통 버튼 스타일 */
-button {
-    padding: 15px 30px;
-    margin: 10px 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #065986;
-    color: #FFFFFF;
-    font-weight: bold;
-    display: inline-block;
-    width: 80%;
-    max-width: 300px;
-}
-
-button:hover {
-    background-color: #757575;
-}
-
-/* 추가/삭제 버튼의 중앙 정렬 */
-fieldset > div.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
-}
-
-fieldset:last-child > div.poll-reminder-time {
-    display: flex;
-    justify-content: space-between;
-}
-
-.poll-reminder-time input,
-.poll-reminder-time span {
-    display: inline-block;
-    width: calc(33% - 10px);
-    margin: 0 5px;
-    text-align: center;
-}
-
-.poll-reminder-time span {
-    line-height: 30px;
-    color: #757575;
-}
-
-input[name="poll-start-date-time"],
-input[name="poll-end-date-time"] {
-    display: inline-block;
-    width: calc(48% - 10px);
-}
-
-input[name="poll-start-date-time"] + span {
-    display: inline-block;
-    width: 4%;
-    text-align: center;
-    line-height: 30px;
-}
-
-  	</style>
-  	
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>  	
 </head>
 
 <body>
@@ -149,14 +35,16 @@ input[name="poll-start-date-time"] + span {
             <legend>항목</legend>
             <input type="text" name="poll-ballot-content" placeholder="필수, 중복 불가"><br>
             <input type="text" name="poll-ballot-content" placeholder="필수, 중복 불가"><br>
-            <button type="button" onclick="addBallotContent(event);">추가</button>
-            <button type="button" onclick="removeBallotContent(event);">삭제</button>
+            <div class="ballot-button-container">
+	            <button type="button" onclick="addBallotContent(event);">추가</button>
+	            <button type="button" onclick="removeBallotContent(event);">삭제</button>
+            </div>
         </fieldset>
 
         <script>
             const addBallotContent=(e)=>{
-                $($("[name='poll-ballot-content']")[0]).clone().val("").insertBefore($(e.target));
-                $("<br>").insertBefore($(e.target));
+                $($("[name='poll-ballot-content']")[0]).clone().val("").insertBefore($(".ballot-button-container"));
+                $("<br>").insertBefore($(".ballot-button-container"));
             }
 
             const removeBallotContent=(e)=>{
@@ -241,13 +129,15 @@ input[name="poll-start-date-time"] + span {
                 <input type="number" name="poll-reminder-minute" value="0" min="0">
                 <span>분 전</span>
             </div>
-            <button type="button" onclick="addPollReminder(event);">추가</button>
-            <button type="button" onclick="removePollReminder(event);">삭제</button>
+            <div class="reminder-button-container">
+	            <button type="button" onclick="addPollReminder(event);">추가</button>
+	            <button type="button" onclick="removePollReminder(event);">삭제</button>
+	        </div>
         </fieldset>
 
         <script>
             const addPollReminder=(e)=>{
-                $($(".poll-reminder-time")[0]).clone().insertBefore($(e.target));
+                $($(".poll-reminder-time")[0]).clone().insertBefore($(".reminder-button-container"));
                 $(".poll-reminder-time").last().find("input").val("0");
             }
 
@@ -260,9 +150,11 @@ input[name="poll-start-date-time"] + span {
                 }
             }
         </script>
-
-        <button type="submit">생성</button>
-        <button type="button">취소</button>
+		
+		<div class="submit-button-container">
+			<button type="submit">생성</button>
+	        <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/share/poll/list';">취소</button>
+		</div>
 
     </form>
 

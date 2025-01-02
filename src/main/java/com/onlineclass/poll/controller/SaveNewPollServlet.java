@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.onlineclass.poll.model.dto.Poll;
 import com.onlineclass.poll.model.service.PollService;
+import com.onlineclass.student.dto.Student;
 
 /**
  * Servlet implementation class SaveNewPollServlet
  */
-@WebServlet("/share/poll/save")
+@WebServlet(name="saveNewPoll", urlPatterns={"/share/poll/save"})
 public class SaveNewPollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,26 +39,33 @@ public class SaveNewPollServlet extends HttpServlet {
 		Timestamp startDate=Timestamp.valueOf(LocalDateTime.parse(request.getParameter("poll-start-date-time"),formatter));
 		Timestamp endDate=Timestamp.valueOf(LocalDateTime.parse(request.getParameter("poll-end-date-time"),formatter));
 		
+		Map<String,Object> memberSignedIn=(Map<String, Object>)request.getSession().getAttribute("user");
+		Student pollCreator=null;
+		if(memberSignedIn.get("userType").equals("학생")) {
+			pollCreator=(Student)memberSignedIn.get("userinfo");
+		}
+		
 		Poll p=Poll.builder()
-				.pollTitle(request.getParameter("poll-title"))
-	            .pollSort(request.getParameter("poll-sort"))
-	            .pollBallotContent(request.getParameterValues("poll-ballot-content"))
-	            .pollMultipleChoice(request.getParameter("poll-multiple-choice"))
-	            .pollAnonymousBallot(request.getParameter("poll-anonymous-ballot"))
-	            .pollResultAccess(request.getParameter("poll-result-access"))
-	            .pollNewBallot(request.getParameter("poll-new-ballot"))
-	            .pollSelectionChange(request.getParameter("poll-selection-change"))
-	            .pollStartDateTime(startDate)
-	            .pollEndDateTime(endDate)
-	            .pollReminderDay(request.getParameterValues("poll-reminder-day"))
-	            .pollReminderHour(request.getParameterValues("poll-reminder-hour"))
-	            .pollReminderMinute(request.getParameterValues("poll-reminder-minute"))
+				.polTitle(request.getParameter("poll-title"))
+	            .polSort(request.getParameter("poll-sort"))
+	            .polBallotContent(request.getParameterValues("poll-ballot-content"))
+	            .polMultipleChoice(request.getParameter("poll-multiple-choice"))
+	            .polAnonymousBallot(request.getParameter("poll-anonymous-ballot"))
+	            .polResultAccess(request.getParameter("poll-result-access"))
+	            .polNewBallot(request.getParameter("poll-new-ballot"))
+	            .polSelectionChange(request.getParameter("poll-selection-change"))
+	            .polStartDateTime(startDate)
+	            .polEndDateTime(endDate)
+	            .polReminderDay(request.getParameterValues("poll-reminder-day"))
+	            .polReminderHour(request.getParameterValues("poll-reminder-hour"))
+	            .polReminderMinute(request.getParameterValues("poll-reminder-minute"))
+	            .polCreator(pollCreator)
 	            .build();
 		
 		int result=new PollService().saveNewPoll(p);
 		
 		if(result>0) {
-			response.sendRedirect(request.getContextPath()+"/share/poll.do");
+			response.sendRedirect(request.getContextPath()+"/share/poll/list");
 		}
 		else {
 			response.sendRedirect(request.getContextPath()+"/share/poll/creation");
