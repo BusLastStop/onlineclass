@@ -36,10 +36,7 @@ public class PollListServlet extends HttpServlet {
 		List<Poll> polls=new PollService().fetchPollList();
 		request.setAttribute("polls", polls);
 		request.setAttribute("today", LocalDateTime.now());
-		
-//		LocalDateTime.now().isBefore(polls.get(0).getPolEndDateTime().toLocalDateTime());
-		
-		
+			
 		request.getRequestDispatcher("/WEB-INF/views/share/poll/polllist.jsp").forward(request, response);
 	}
 

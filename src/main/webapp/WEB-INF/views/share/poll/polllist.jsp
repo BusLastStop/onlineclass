@@ -75,6 +75,7 @@
 		margin:5px 60px 5px 0;
 		background-color:#ffccbd;
 		border-radius:3px;
+		cursor:pointer;
 	}
 </style>
 <section>
@@ -106,7 +107,7 @@
 									${p.polCode}
 								</td>
 								<td class="polTitle">
-									<a href="${path}/share/poll/view">
+									<a href="${path}/share/poll/view?polCode=${p.polCode}">
 										${p.polTitle}
 									</a>
 								</td>
@@ -114,7 +115,7 @@
 									${p.polCreator.stuName}
 								</td>
 								<td class="polCreatedDateTime">
-									<fmt:formatDate value="${p.polCreatedDateTime}" pattern="dd/MM/YYYY" />
+									<fmt:formatDate value="${p.polCreatedDateTime}" pattern="dd/MM/YYYY"/>
 								</td>
 								<td class="closedOrNot">
 									<c:if test="${today.isAfter(p.polEndDateTime.toLocalDateTime())}">
@@ -138,7 +139,7 @@
 
 <script>
 	const createNewPoll=(e)=>{
-		location.assign('${pageContext.request.contextPath}/share/poll/creation');
+		location.assign('${pageContext.request.contextPath}/share/poll/new');
 	}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

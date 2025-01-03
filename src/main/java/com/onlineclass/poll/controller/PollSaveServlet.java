@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -12,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.onlineclass.poll.model.dto.Ballot;
 import com.onlineclass.poll.model.dto.Poll;
+import com.onlineclass.poll.model.dto.Reminder;
 import com.onlineclass.poll.model.service.PollService;
 import com.onlineclass.student.dto.Student;
 
@@ -35,9 +39,6 @@ public class PollSaveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-		Timestamp startDate=Timestamp.valueOf(LocalDateTime.parse(request.getParameter("poll-start-date-time"),formatter));
-		Timestamp endDate=Timestamp.valueOf(LocalDateTime.parse(request.getParameter("poll-end-date-time"),formatter));
 		
 		Map<String,Object> memberSignedIn=(Map<String, Object>)request.getSession().getAttribute("user");
 		Student pollCreator=null;
@@ -45,10 +46,36 @@ public class PollSaveServlet extends HttpServlet {
 			pollCreator=(Student)memberSignedIn.get("userinfo");
 		}
 		
+		String[] ballotContent=request.getParameterValues("poll-ballot-content");
+		List<Ballot> ballotData=new ArrayList();
+		for(String bc: ballotContent) {
+			Ballot b=Ballot.builder()
+					.balContent(bc)
+					.build();
+			ballotData.add(b);
+		}
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		Timestamp startDate=Timestamp.valueOf(LocalDateTime.parse(request.getParameter("poll-start-date-time"),formatter));
+		Timestamp endDate=Timestamp.valueOf(LocalDateTime.parse(request.getParameter("poll-end-date-time"),formatter));
+		
+        String[] reminderDay=request.getParameterValues("poll-reminder-day");
+		String[] reminderHour=request.getParameterValues("poll-reminder-hour");
+		String[] reminderMinute=request.getParameterValues("poll-reminder-minute");
+		List<Reminder> reminderData=new ArrayList();
+		for(int i=0;i<reminderMinute.length;i++) {
+			Reminder r=Reminder.builder()
+						.remDay(reminderDay[i])
+						.remHour(reminderHour[i])
+						.remMinute(reminderMinute[i])
+						.build();
+			reminderData.add(r);
+		}
+		
 		Poll p=Poll.builder()
 				.polTitle(request.getParameter("poll-title"))
 	            .polSort(request.getParameter("poll-sort"))
-	            .polBallotContent(request.getParameterValues("poll-ballot-content"))
+	            .polBallot(ballotData)
 	            .polMultipleChoice(request.getParameter("poll-multiple-choice"))
 	            .polAnonymousBallot(request.getParameter("poll-anonymous-ballot"))
 	            .polResultAccess(request.getParameter("poll-result-access"))
@@ -56,9 +83,7 @@ public class PollSaveServlet extends HttpServlet {
 	            .polSelectionChange(request.getParameter("poll-selection-change"))
 	            .polStartDateTime(startDate)
 	            .polEndDateTime(endDate)
-	            .polReminderDay(request.getParameterValues("poll-reminder-day"))
-	            .polReminderHour(request.getParameterValues("poll-reminder-hour"))
-	            .polReminderMinute(request.getParameterValues("poll-reminder-minute"))
+	            .polReminder(reminderData)
 	            .polCreator(pollCreator)
 	            .build();
 		

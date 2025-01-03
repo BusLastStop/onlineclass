@@ -1,11 +1,15 @@
 package com.onlineclass.poll.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.onlineclass.poll.model.dto.Poll;
+import com.onlineclass.poll.model.service.PollService;
 
 /**
  * Servlet implementation class PollViewServlet
@@ -26,8 +30,12 @@ public class PollViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String polCode=request.getParameter("polCode");
+		Poll poll=new PollService().fetchPollDetail(polCode);
+		
+		request.setAttribute("poll", poll);
+		request.getRequestDispatcher("/WEB-INF/views/share/poll/pollview.jsp").forward(request, response);
 	}
 
 	/**
