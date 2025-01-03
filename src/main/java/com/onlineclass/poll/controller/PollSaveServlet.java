@@ -20,13 +20,13 @@ import com.onlineclass.student.dto.Student;
  * Servlet implementation class SaveNewPollServlet
  */
 @WebServlet(name="saveNewPoll", urlPatterns={"/share/poll/save"})
-public class SaveNewPollServlet extends HttpServlet {
+public class PollSaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SaveNewPollServlet() {
+    public PollSaveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
