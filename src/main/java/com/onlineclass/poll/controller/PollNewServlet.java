@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class PollCreationServlet
  */
-@WebServlet("/share/poll/creation")
+@WebServlet("/share/poll/new")
 public class PollNewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

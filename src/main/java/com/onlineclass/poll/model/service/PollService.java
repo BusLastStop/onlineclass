@@ -8,11 +8,56 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.onlineclass.poll.model.dao.PollDao;
+import com.onlineclass.poll.model.dto.Ballot;
 import com.onlineclass.poll.model.dto.Poll;
+import com.onlineclass.poll.model.dto.Reminder;
 
 public class PollService {
 
 	private PollDao dao=new PollDao();
+	
+	public int saveNewPoll(Poll p) {
+		SqlSession session=getSession();
+		int resultPoll=dao.savePollDetail(session, p);
+		
+		if(resultPoll>0&&p.getPolBallot().size()>0) {
+			int resultBallot=0;
+			
+			for(Ballot pb: p.getPolBallot()) {
+				pb.setPolCode(p.getPolCode());
+				resultBallot=dao.savePollBallot(session, pb);
+				if(resultBallot==0) {
+					session.rollback();
+					session.close();
+					return 0;
+				}
+			}
+			
+			if(resultBallot>0&&p.getPolReminder().size()>0) {
+				
+				for(Reminder pr: p.getPolReminder()) {
+					pr.setPolCode(p.getPolCode());
+					int resultReminder=dao.savePollReminder(session, pr);
+					if(resultReminder==0) {
+						session.rollback();
+						session.close();
+						return 0;
+					}
+				}
+			}
+			
+		}
+		else {
+			session.rollback();
+			session.close();
+			return 0;
+		}
+		
+		session.commit();
+		session.close();
+		
+		return resultPoll;
+	}
 	
 	public List<Poll> fetchPollList() {
 		SqlSession session=getSession();
@@ -21,47 +66,10 @@ public class PollService {
 		return result;
 	}
 	
-	public int saveNewPoll(Poll p) {
+	public Poll fetchPollDetail(String polCode) {
 		SqlSession session=getSession();
-		int result=dao.savePollDetail(session, p);
-		
-		if(result>0&&p.getPolBallotContent().length>0) {
-			for(String ballot:p.getPolBallotContent()) {
-				result=dao.savePollBallot(session,Map.of("polCode",p.getPolCode(),"balContent",ballot));
-				if(result==0) {
-					session.rollback();
-					return 0;
-				}
-			}
-			
-			if(p.getPolReminderDay().length>0) {
-				for(int i=0;i<p.getPolReminderDay().length;i++) {
-					result=dao.savePollReminder(session, Map.of(
-							"remDay",p.getPolReminderDay()[i],
-							"remHour",p.getPolReminderHour()[i],
-							"remMinute",p.getPolReminderMinute()[i],
-							"polCode",p.getPolCode())
-							);
-					if(result==0) {
-						session.rollback();
-						return 0;
-					}
-					
-				}
-			}
-			
-			if(result==0) {
-				session.rollback();
-				return 0;
-			}
-			
-		}
-		else {
-			return 0;
-		}
-		session.commit();
+		Poll result=dao.fetchPollDetail(session, polCode);
 		session.close();
-		
 		return result;
 	}
 	
