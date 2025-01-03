@@ -22,10 +22,10 @@
 	div#boardList>h2{ display:inline-block;margin:10px 0 10px 10%; }
 	div#boardList>table{ margin:auto;width:90%; }
 	div#boardList>#board-category{ height:25px;margin:0 0 10px 10%; }
-	table .polCode{ width:8%; padding-left:5px; text-aling:center; }
-	table .polTitle{ width:auto; padding-left:5px; text-align:center; }
-	table .polCreator{ width:10%; padding-left:5px; text-align:center; }
-	table .polCreatedDateTime{ width:12%; padding-left:5px; text-align:center; }
+	table .polCode{ width:8%; text-aling:center; }
+	table .polTitle{ width:auto; text-align:center; }
+	table .polCreator{ width:10%; text-align:center; }
+	table .polCreatedDateTime{ width:12%; text-align:center; }
 	table .closedOrNot{ width:10%; text-align:center; }
 	#vote{
 		width:90%;
@@ -72,7 +72,7 @@
 	button#vote-generator{
 		width:70px;
 		height:30px;
-		margin:5px 10px 5px 0;
+		margin:5px 60px 5px 0;
 		background-color:#ffccbd;
 		border-radius:3px;
 	}
@@ -106,7 +106,7 @@
 									${p.polCode}
 								</td>
 								<td class="polTitle">
-									<a href="${path}/share/poll/view}">
+									<a href="${path}/share/poll/view">
 										${p.polTitle}
 									</a>
 								</td>
