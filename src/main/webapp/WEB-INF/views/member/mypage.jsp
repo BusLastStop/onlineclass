@@ -18,6 +18,7 @@
 		width:100%;
 		height:100%;
 		display:flex;
+		flex-direction:column;
 		justify-content:center;
 		align-items:center;
 	}
@@ -41,6 +42,7 @@
 <section>
 	<jsp:include page="/WEB-INF/views/common/mypageheader.jsp"/>
 	<div id="mypage">
+		<div style="width:90%;text-align:right;"><button>비밀번호 변경하고 싶다</button></div>
 		<div class="mypage-container">
 			<c:if test="${user.userType eq '학생'}">
 				<div style="width:40%;margin:auto;">
@@ -90,10 +92,10 @@
 				<div style="display:flex;justify-content:space-evenly;align-items:center;margin:30px 0 30px 0;">
 					<div class="info-circle"><p>총 누적</p><p>강의 수익</p><p>${user.userinfo.teaTotalAccumIncome}</p></div>
 					<div class="info-circle"><p>녹화 강의</p><p>누적 강의 수익</p><p>${user.userinfo.teaLectureAccumIncome}</p></div>
-					<div class="info-circle"><p>실시간 강의</p><p>누적 강의 수익</p><p>${user.userinfo.teaTutAccumIncome}</p></div>
+					<div class="info-circle"><p>실시간 강의</p><p>누적 강의 수익</p><p>${user.userinfo.teaTutuorialAccumIncome}</p></div>
 				</div>
 				<div style="display:flex;justify-content:space-evenly;align-items:center;margin:30px 0 30px 0;">
-					<div class="info-circle"><p>실시간 강의</p><p>누적 매칭 시간</p><p>${user.userinfo.teaTutAccumMatchTime}</p></div>
+					<div class="info-circle"><p>실시간 강의</p><p>누적 매칭 시간</p><p>${user.userinfo.teaTutuorialAccumMatchTime}</p></div>
 					<div class="info-circle"><p>실시간 강의</p><p>누적 매칭 횟수</p><p>${user.userinfo.teaTutIdenticalMatchCount}</p></div>
 					<div class="info-circle"><p>실시간 강의 누적</p><p>동일 매칭 횟수</p><p>${user.userinfo.teaTutIdenticalMatchCount}</p></div>
 				</div>

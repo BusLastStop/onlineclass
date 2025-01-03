@@ -10,8 +10,15 @@
 		flex-direction:column;
 		align-items:center;
 	}
+	#slot-container{
+		width:80%;
+		height:100%;
+	}
 </style>
 <section>
 	<jsp:include page="/WEB-INF/views/teacher/realtimelectureheader.jsp"/>
+	<div id="slot-container">
+	
+	</div>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -39,7 +39,7 @@
 				<c:forEach var="post" items="${postList}">
 					<tr>
 						<td class="category">카테고리</td>
-						<td class="title"><a href="${path}/share/postdetail.do?posCode=${post.posCode}">${post.posTitle}</a></td>
+						<td class="title"><a href="${path}/share/post/postdetail.do?posCode=${post.posCode}">${post.posTitle}</a></td>
 						<td class="nickname">${post.student.stuName}</td>
 						<td class="date">${post.posDateTime}</td>
 						<td class="readCount">조회수</td>

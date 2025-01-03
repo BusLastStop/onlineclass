@@ -108,12 +108,12 @@
 				<table>
 					<c:forEach var="reply" items="${replies}">
 						<tr class="level${reply.posRepLevel}">
-							<c:if test="${reply.student!=null}">
-								<script>console.log("학생")</script>
+							<c:if test="${not empty reply.student}">
+								<script>console.log("${reply.student.stuName}")</script>
 								<td class="comment-title">${reply.student.stuName}</td>
 							</c:if>
-							<c:if test="${reply.teacher!=null}">
-								<script>console.log("강사")</script>
+							<c:if test="${not empty reply.teacher.teaName}">
+								<script>console.log("${reply.teacher.teaName}")</script>
 								<td class="comment-title">${reply.teacher.teaName}</td>
 							</c:if>
 							<td class="comment-content">${reply.posRepContent}</td>
