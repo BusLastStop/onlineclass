@@ -31,7 +31,7 @@ public class RealTimeLectureListServlet extends HttpServlet {
 		Map<String,Object> user = (Map<String,Object>)request.getSession().getAttribute("user");
 		try {
 			if(((String)user.get("userType")).equals("학생")) {
-				request.getRequestDispatcher("/WEB-INF/views/student/searchteacher.jsp").forward(request, response);
+				request.getRequestDispatcher("/student/searchteacher.do").forward(request, response);
 			}else if(((String)user.get("userType")).equals("강사")) {
 				request.getRequestDispatcher("/WEB-INF/views/teacher/lectureslot.jsp").forward(request, response);
 			}

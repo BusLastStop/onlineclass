@@ -14,6 +14,7 @@ import com.onlineclass.student.dto.Enrollment;
 import com.onlineclass.student.dto.FavouriteTeacher;
 import com.onlineclass.student.dto.InterestedLecture;
 import com.onlineclass.student.dto.Student;
+import com.onlineclass.teacher.dto.Teacher;
 
 public class StudentService {
 	private StudentDAO dao = new StudentDAO();
@@ -215,5 +216,23 @@ public class StudentService {
 		else session.rollback();
 		
 		return result;
+	}
+	
+	public List<Teacher> getTeacherList(){
+		SqlSession session = getSession();
+		List<Teacher> teachers = dao.getTeacherList(session);
+		
+		session.close();
+		
+		return teachers;
+	}
+	
+	public Teacher getTeacherDetails(String teaCode) {
+		SqlSession session = getSession();
+		Teacher teacher = dao.getTeacherDetails(session, teaCode);
+		
+		session.close();
+		
+		return teacher;
 	}
 }

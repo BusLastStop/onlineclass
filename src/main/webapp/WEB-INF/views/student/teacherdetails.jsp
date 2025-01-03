@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<title>강의 상세 페이지</title>
+<title>강사 상세 페이지</title>
 <style>
 	*{
 		font-family: "Noto Sans KR", serif;
@@ -76,15 +76,15 @@
 </style>
 </head>
 <body>
-	<h1>${lecture.lecName}</h1>
+	<h1>${teacher.tutorial.tutSubject}</h1><!-- 임시로 subject를 넣음 -->
 	<div style="text-align:center;border:0;">
 		<img src="${pageContext.request.contextPath}/resources/images/community.png" alt="강의 사진" id="lecturePic">
 	</div>
 	<c:if test="${not empty sessionScope.user}">
 		<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">
-			<button id="registLecture" onclick="confirm('수강신청 하시겠습니까?')?registLecture():'';">수강신청</button>
+			<button id="registLecture" onclick="">수업일정</button>
 			<button id="cancelRegist" onclick="confirm('수강신청을 취소하시겠습니까?')?location.assign('${pageContext.request.contextPath}/student/cancelregist.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}'):''" style="display:none;">수강취소</button>
-			<button id="interestedLecture" onclick="interestedLecture();">관심강의</button>
+			<button id="lectureList" onclick="">강의목록</button>
 			<button id="interestedTeacher" onclick="interestedTeacher();">관심강사</button>
 			<button>수업계획서</button>
 		</div>
@@ -94,24 +94,18 @@
 		<p>수업 개요에 대한 내용을 적는 곳</p>
 	</div>
 	<div>
-		<h4>수업 목차</h4>
-		<ul>
-			<li>목차</li>
-			<li>목차</li>
-			<li>목차</li>
-		</ul>
+		<h4>수업 소개</h4>
+		<p>대충 2~3줄 적어주세요! 😊</p>
 	</div>
-	<div>
-		<h4>강사소개</h4>
-		<div style="display:flex;justify-content:space-around;border:0;">
-		<img src="${pageContext.request.contextPath}/resources/images/teacher(${lecture.teacher.teaGender}).jpeg" alt="강의 사진" width="300px" height="300px">
+	<div style="display:flex;justify-content:space-around;border:0;">
+		<img src="${pageContext.request.contextPath}/resources/images/teacher(${teacher.teaGender}).jpeg" alt="강의 사진" width="300px" height="300px">
 		<div style="width:50%;">
 			<p>
-				<span>${lecture.teacher.teaName}</span>
+				<span>${teacher.teaName}</span>
 				<span>/</span>
-				<span>${lecture.teacher.teaUniversity}</span>
+				<span>${teacher.teaUniversity}</span>
 				<span>/</span>
-				<span>${lecture.teacher.teaSubject}</span>
+				<span>${teacher.teaSubject}</span>
 			</p>
 			<br>
 			<p>경력</p>
@@ -122,19 +116,18 @@
 			<br>
 			<p>연락처</p>
 			<p>
-				<span>${lecture.teacher.teaEmail}</span>
+				<span>${teacher.teaEmail}</span>
 				<span>/</span>
-				<span>${lecture.teacher.teaPhone}</span>
+				<span>${teacher.teaPhone}</span>
 			</p>
 		</div>
-	</div>
 	</div>
 	<c:if test="${not empty sessionScope.user}">
 		<div>
 			<h4>강의후기</h4>
-			<c:if test="${not empty lecture.review}">
+			<c:if test="${not empty teacher.tutorial.reviews}">
 				<table>
-					<c:forEach var="review" items="${lecture.review}">
+					<c:forEach var="review" items="${teacher.tutorial.reviews}">
 						<tr>
 							<td>${review.student.stuName}</td>
 							<td>${review.revComment}</td>
@@ -147,26 +140,14 @@
 	</c:if>
 	<div style="display:flex;justify-content:space-around;align-items:center;padding:5px;border:0;">
 		<c:if test="${not empty sessionScope.user}">
-			<button id="registLectureBottom" onclick="confirm('수강신청 하시겠습니까?')?registLecture():'';">수강신청</button>
+			<button id="registLectureBottom" onclick="">수강신청</button>
 			<button id="cancelRegistBottom" onclick="confirm('수강신청을 취소하시겠습니까?')?location.assign('${pageContext.request.contextPath}/student/cancelregist.do?lecCode=${lecture.lecCode}&stuCode=${user.userinfo.stuCode}'):''" style="display:none;">수강취소</button>
 		</c:if>
 		<button onclick="window.close();">나가기</button>
 	</div>
 	<script>
-		const interestedLecture=()=>{
-			$.post("${pageContext.request.contextPath}/student/interestedlecture.do",{stuCode:${user.userinfo.stuCode},lecCode:${lecture.lecCode}},data=>{
-				if(data!=""){
-					const color = data.split(",");
-					document.getElementById("interestedLecture").style.backgroundColor=color[0];
-					document.getElementById("interestedLecture").style.borderColor=color[1];
-				}else{
-					alert("오류!");
-				}
-			});
-		};
-		
 		const interestedTeacher=()=>{
-			$.post("${pageContext.request.contextPath}/student/interestedteacher.do",{stuCode:${user.userinfo.stuCode},teaCode:${lecture.teacher.teaCode}},data=>{
+			$.post("${pageContext.request.contextPath}/student/interestedteacher.do",{stuCode:${user.userinfo.stuCode},teaCode:${teacher.teaCode}},data=>{
 				if(data!=""){
 					const color = data.split(",");
 					document.getElementById("interestedTeacher").style.backgroundColor=color[0];
@@ -177,7 +158,7 @@
 			});
 		};
 		
-		const registLecture=()=>{
+		/* const registLecture=()=>{
 			IMP.init("imp02587333");
 			IMP.request_pay(
 				{
@@ -204,19 +185,9 @@
 					}
 				}
 			);
-		};
+		}; */
 		
-		$.post("${pageContext.request.contextPath}/student/checkinterestedlecture.do",{stuCode:${user.userinfo.stuCode},lecCode:${lecture.lecCode}},data=>{
-			if(data!=""){
-				const color = data.split(",");
-				document.getElementById("interestedLecture").style.backgroundColor=color[0];
-				document.getElementById("interestedLecture").style.borderColor=color[1];
-			}else{
-				alert("오류!");
-			}
-		});
-		
-		$.post("${pageContext.request.contextPath}/student/checkinterestedteacher.do",{stuCode:${user.userinfo.stuCode},teaCode:${lecture.teacher.teaCode}},data=>{
+		$.post("${pageContext.request.contextPath}/student/checkinterestedteacher.do",{stuCode:${user.userinfo.stuCode},teaCode:${teacher.teaCode}},data=>{
 			if(data!=""){
 				const color = data.split(",");
 				document.getElementById("interestedTeacher").style.backgroundColor=color[0];
@@ -226,7 +197,7 @@
 			}
 		});
 		
-		$.post("${pageContext.request.contextPath}/student/checkregistlecture.do",{stuCode:${user.userinfo.stuCode},lecCode:${lecture.lecCode}},data=>{
+		/* $.post("${pageContext.request.contextPath}/student/checkregistlecture.do",{stuCode:${user.userinfo.stuCode},lecCode:${lecture.lecCode}},data=>{
 			if(data!=""){
 				const display = data.split(",");
 				document.getElementById("registLecture").style.display=display[0];
@@ -236,7 +207,7 @@
 			}else{
 				alert("오류!");
 			}
-		});
+		}); */
 	</script>
 </body>
 </html>

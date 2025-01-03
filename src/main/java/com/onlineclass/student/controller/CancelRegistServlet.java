@@ -14,14 +14,14 @@ import com.onlineclass.student.service.StudentService;
 /**
  * Servlet implementation class CancelRegistServlet
  */
-@WebServlet("/student/cancleregist.do")
-public class CancleRegistServlet extends HttpServlet {
+@WebServlet("/student/cancelregist.do")
+public class CancelRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CancleRegistServlet() {
+    public CancelRegistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

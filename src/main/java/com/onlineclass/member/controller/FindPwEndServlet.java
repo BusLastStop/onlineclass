@@ -1,8 +1,19 @@
 package com.onlineclass.member.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -106,7 +117,39 @@ public class FindPwEndServlet extends HttpServlet {
 							default: tempPw+=(char)((int)(Math.random()*26)+65); break;
 						}
 					}
+					
 					// 여기서 이메일로 비밀번호를 전송하기
+					Properties props = new Properties();
+					props.put("mail.smtp.host", "smtp.gmail.com");
+					props.put("mail.smtp.auth", "true");
+					props.put("mail.smtp.port",587);
+					props.put("mail.smtp.starttls.enable","true");
+					
+					Session session = Session.getDefaultInstance(props, 
+						new Authenticator() {
+							protected PasswordAuthentication getPasswordAuthentication() {
+								return new PasswordAuthentication("kkjjj16@gmail.com","nyee jokk uude mgbo");
+							}
+					});
+
+					session.setDebug(true);
+							
+					try {
+						Message message = new MimeMessage(session);
+						message.setFrom(new InternetAddress("kkjjj16@gmail.com", "Test"));
+						message.addRecipient(Message.RecipientType.TO,
+									new InternetAddress(email, name));
+						message.setSubject("Send OnlineClass Password");
+						message.setText("Your temporary password is "+ tempPw);
+						Transport.send(message);
+					} catch (AddressException e) {
+						e.printStackTrace();
+					} catch (MessagingException e) {
+						e.printStackTrace();
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+					
 					// 임시로 alert를 사용해서 비밀번호를 알려줌
 					msg = "임시 비밀번호는 "+tempPw+"입니다.";
 					loc = "/teacher/temppw.do?userId="+id+"&userPw="+tempPw+"&email="+email;

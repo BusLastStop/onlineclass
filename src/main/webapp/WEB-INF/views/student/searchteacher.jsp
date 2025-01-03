@@ -119,14 +119,31 @@
 				</div>
 			</div>
 			<div class="filter-container searchName">
-				<h4>강의명</h4>
-				<input type="text" name="lectureName">
 				<h4>강사명</h4>
 				<input type="text" name="instructorName">
+				<h4>수강 인원</h4>
+				<input type="text" name="studentsNumber">
 			</div>
 		</div>
 	</form>
 	<div id="teacher-container">
+		<c:if test="${not empty teachers}">
+			<c:forEach var="teacher" items="${teachers}">
+				<div style="display:flex" onclick="window.open('${path}/student/teacherdetails.do?teaCode=${teacher.teaCode}','_blank','width=1000,height=1000')">
+					<div>
+						<img src="" alt="강사사진">
+					</div>
+					<div>
+						<span>강사명 : ${teacher.teaName}</span><br>
+						<span>출신대학 : ${teacher.teaUniversity}</span><br>
+						<span>전공과목 : ${teacher.teaSubject}</span><br>
+						<span>연락처</span><br>
+						<span>이메일 : ${teacher.teaEmail}</span>
+						<span>전화번호 : 	${teacher.teaPhone}</span><br>
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
 	</div>
 	<script>
 		const openFilter=()=>{

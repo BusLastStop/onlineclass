@@ -11,6 +11,7 @@ import com.onlineclass.student.dto.Enrollment;
 import com.onlineclass.student.dto.FavouriteTeacher;
 import com.onlineclass.student.dto.InterestedLecture;
 import com.onlineclass.student.dto.Student;
+import com.onlineclass.teacher.dto.Teacher;
 
 public class StudentDAO {
 	public Student selectOneStudent(SqlSession session, String userId) {
@@ -99,5 +100,13 @@ public class StudentDAO {
 	
 	public int cancelRegist(SqlSession session, Map<String,String> code) {
 		return session.delete("student.cancelRegist",code);
+	}
+	
+	public List<Teacher> getTeacherList(SqlSession session){
+		return session.selectList("student.getTeacherList");
+	}
+	
+	public Teacher getTeacherDetails(SqlSession session, String teaCode){
+		return session.selectOne("student.getTeacherDetails",teaCode);
 	}
 }

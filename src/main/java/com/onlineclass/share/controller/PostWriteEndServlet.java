@@ -60,15 +60,15 @@ public class PostWriteEndServlet extends HttpServlet {
 		int result = new ShareService().postWrite(data);
 		if(result>0) {
 			String msg, loc;
-			msg = "성공메시지(DB적용됨!)";
-			loc = "/share/post.do";
+			msg = "게시글을 올렸습니다";
+			loc = "/share/post/post.do";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		}else {
 			String msg, loc;
-			msg = "실패메시지(DB적용됨...)";
-			loc = "/share/post.do";
+			msg = "게시글이 올라가지 않았습니다";
+			loc = "/share/post/post.do";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);

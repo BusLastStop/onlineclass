@@ -100,7 +100,7 @@ public class PostServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("postList",postList);
 		
-		request.getRequestDispatcher("/WEB-INF/views/share/post.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/share/post/post.jsp").forward(request, response);
 	}
 
 	/**

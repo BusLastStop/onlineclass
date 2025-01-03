@@ -1,6 +1,10 @@
 package com.onlineclass.teacher.dto;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.onlineclass.member.dto.Lecture;
+import com.onlineclass.student.dto.Tutorial;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,4 +33,6 @@ public class Teacher {
 	private int teaTutuorialAccumMatchTime;
 	private int teaTutAccumMatchCount;
 	private int teaTutIdenticalMatchCount;
+	private Tutorial tutorial;
+	private List<Lecture> lectures;
 }
